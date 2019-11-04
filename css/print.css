@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+body{
+	font-size: 100%;
+}
+
+#ucfhb,
+.site-billboard,
+.site-footer-container,
+.img-fluid,
+.nav-pills.home
+{
+	display: none;
+}
+
+.staff > img,
+.news > img,
+.media > img
+{
+	display: block;
+}
+
+.site-title{
+	font-size: 2.5em;
+}
+
+.site-subtitle{
+	font-size: 0.4em;
+}
+
+.page-header > .pull-xs-right{
+	display: none;
+}

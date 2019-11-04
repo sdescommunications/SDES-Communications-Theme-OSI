@@ -1,0 +1,23 @@
+.countdown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;  
+  background: black;
+}
+
+.countdown .week, .countdown .day, .countdown .hour, .countdown .min, .countdown .sec {
+  padding: 10px;
+  text-align: center;
+}
+
+.countdown .week .num, .countdown .day .num, .countdown .hour .num, .countdown .min .num, .countdown .sec .num {
+  display: block;
+  font-size: 40px;
+  color: #ffc904;
+}
+
+.countdown .week .word, .countdown .day .word, .countdown .hour .word, .countdown .min .word, .countdown .sec .word {
+  display: block;
+  font-size: 15px;
+  color: white;
+}

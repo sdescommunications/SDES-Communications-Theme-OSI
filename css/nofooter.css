@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.site-content{
+	min-height: 665px;
+}
+
+.site-billboard + .site-content{
+	min-height: 315px;
+}
+
+.site-footer{
+	height: 3px;
+	background-position: 0px -2px;
+	padding: 0;
+	overflow: hidden;
+}

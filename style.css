@@ -1,0 +1,14 @@
+/*
+	Theme Name: Strategic Initiatives & Communications - Bootstrap 4 Version
+	Theme URI: https://sdescmsdev.smca.ucf.edu/
+	Description: WordPress theme conversion.
+	Author: Strategic Initiatives & Communications
+	Author URI: https://sdescmsdev.smca.ucf.edu/
+	GitHub Theme URI: https://github.com/sdescommunications/SDES-Communications-Theme
+
+	*/
+
+	@import url('./css/bootstrap.css');
+	@import url('./css/cards.css');
+	@import url('./css/countdown.css');
+	
