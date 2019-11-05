@@ -811,7 +811,7 @@ class sc_quizjs extends ShortCodeBase{
 
 	public static function callback( $attr, $content = null) {
 		?>
-			<script type="text/javascript" src="js/quizselectmin.js"></script>
+			<script type="text/javascript" src="js/quizselect.min"></script>
 		<?php
 	}
 }
