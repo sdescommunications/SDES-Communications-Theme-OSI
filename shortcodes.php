@@ -795,6 +795,27 @@ class sc_countdown extends ShortcodeBase{
 
 }
 
+/*
+ * OSI Shortcodes
+ */
+class sc_quizjs extends ShortCodeBase{
+	public
+	$name = 'QuizJS', // The name of the shortcode.
+	$command = 'QuizJS', // The command used to call the shortcode.
+	$description = 'Adds JS for Volunteer Quiz', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = false, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array();
+
+	public static function callback( $attr, $content = null) {
+		?>
+			<script type="text/javascript" src="js/quizselect.min"></script>
+		<?php
+	}
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
@@ -805,6 +826,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_iframe',
 		__NAMESPACE__.'\sc_redirect',
 		__NAMESPACE__.'\sc_countdown',
+		__NAMESPACE__.'\sc_quizjs',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
