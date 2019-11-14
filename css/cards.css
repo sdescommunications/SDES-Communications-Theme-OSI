@@ -346,15 +346,16 @@
 		bottom: 175px;
 	}
 	#video-wrapper{
-		height: 317px;
+		height: 310px;
 	} 
 }
 @media (min-width: 1200px){
 	#myVideo {
 		bottom: 250px;
 	}
+	/*Testing something on my end */
 	#video-wrapper{
-		height: 536px; 
+		height: 350px; 
 	}
 
  
