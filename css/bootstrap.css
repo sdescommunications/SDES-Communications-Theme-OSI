@@ -990,10 +990,6 @@ header .header-break img {
   color: #ffcc00;
 }
 
-.table i {
-  color: #ffcc00;
-}
-
 .yellow {
   background: #ffcc00;
   width: 100% !important;
@@ -1365,10 +1361,6 @@ footer h6 {
   font-size: 14px;
 }
 
-footer i {
-  color: #ffcc00;
-}
-
 footer a {
   font-family: "gotham_boldregular", Arial, sans-serif !important;
   color: white !important;
@@ -1485,11 +1477,6 @@ footer .site-sub-footer .footer-title {
 #accordion .card .card-header a {
   color: #000;
 }
-
-#accordion .card .card-header a i {
-  color: #ffcc00;
-}
-
 #accordion .card .card-header a:link {
   text-decoration: none;
 }
