@@ -79,6 +79,11 @@ hr {
   text-align: left;
 }
 
+i {
+  /* Might as well make this default since there are 3 classes that are dedicated to styling like this */
+color: #ffcc00;
+}
+
 section {
   display: flex;
   flex-wrap: wrap;
@@ -983,11 +988,6 @@ header .header-break img {
   .menu-left {
     border: none;
   }
-}
-
-  i {
-    /* Might as well make this default since there are 3 classes that are dedicated to styling like this */
-  color: #ffcc00;
 }
 
 .yellow {
