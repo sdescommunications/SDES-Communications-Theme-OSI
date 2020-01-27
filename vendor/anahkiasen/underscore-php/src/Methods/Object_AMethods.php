@@ -4,7 +4,7 @@ namespace Underscore\Methods;
 /**
  * Methods to manage objects.
  */
-class ObjectMethods extends CollectionMethods
+class Object_AMethods extends CollectionMethods
 {
     /**
      * Get all methods from an object.

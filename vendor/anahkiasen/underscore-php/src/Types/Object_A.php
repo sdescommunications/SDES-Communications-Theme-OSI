@@ -10,7 +10,7 @@ use Underscore\Traits\Repository;
  *
  * @mixin ObjectMethods
  */
-class Object extends Repository
+class Object_A extends Repository
 {
     /**
      * The method used to convert new subjects.
