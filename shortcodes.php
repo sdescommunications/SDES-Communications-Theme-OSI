@@ -108,24 +108,24 @@ class sc_menuPanel extends ShortcodeBase {
 			ob_start();
 			?>
 
-			<div class="menu">
-				<div class="menu-header">
-					<?= $context['heading'] ?>
-				</div>
-				<ul class="list-group menu-right list-unstyled">
-					<?php 
+<div class="menu">
+	<div class="menu-header">
+		<?= $context['heading'] ?>
+	</div>
+	<ul class="list-group menu-right list-unstyled">
+		<?php 
 					foreach ( (array) $context['menu_items'] as $key => $menu_item ) {
 						$title = $menu_item->title;
 						$url = SDES_Static::url_ensure_prefix( $menu_item->url );
 						//removed as of new theme 8/31/2017
 						//$class_names = SDES_Static::Get_ClassNames( $menu_item, 'nav_menu_css_class' );
 					?>
-						<li><a href="<?= $url ?>" class="list-group-item"><?= $title ?></a></li>
-					<?php  } ?>
-				</ul>
-			</div>
-			
-			<?php
+		<li><a href="<?= $url ?>" class="list-group-item"><?= $title ?></a></li>
+		<?php  } ?>
+	</ul>
+</div>
+
+<?php
 			return ob_get_clean();
 		}
 	}
@@ -165,9 +165,9 @@ add_shortcode( 'myShortcode', 'sc_myShortcode' );
 function render_sc_myShortcode( $context ) {
 	ob_start();
 	?>
-	<div>Some: <?=$context['disp1']?></div>
-	<div>Another: <?=$context['disp2']?></div>
-	<?php
+<div>Some: <?=$context['disp1']?></div>
+<div>Another: <?=$context['disp2']?></div>
+<?php
 	return ob_get_clean();
 }
 /**************** SHORTCODE Boilerplate END   **********************/
@@ -242,10 +242,10 @@ class sc_events extends ShortcodeBase {
 		if ( libxml_get_errors() ) {
 			ob_start();
 			?>
-			<li>Failed loading XML</li>
-			<?php foreach ( libxml_get_errors() as $error ) : ?>
-				<li><?= htmlentities( $error->message ) ?></li>
-			<?php endforeach;
+<li>Failed loading XML</li>
+<?php foreach ( libxml_get_errors() as $error ) : ?>
+<li><?= htmlentities( $error->message ) ?></li>
+<?php endforeach;
 			return ob_get_clean();
 		}		
 
@@ -253,16 +253,16 @@ class sc_events extends ShortcodeBase {
 		$count = ( count( $xml->channel->item ) > $attr['limit'] ) ? $attr['limit'] : count( $xml->channel->item );
 		ob_start();
 		?>
-			
-			<h2><?= $attr['header'] ?></h2>
-			<hr>
-			<?= $footer ?>
-			
-				<?php
+
+<h2><?= $attr['header'] ?></h2>
+<hr>
+<?= $footer ?>
+
+<?php
 					// Check for items.
 				if ( 0 === count( $xml->channel->item ) ) : ?>
-				<p>Sorry, no events could be found.</p>
-				<?php
+<p>Sorry, no events could be found.</p>
+<?php
 				else :
 						// Loop through until limit.
 					for ( $i = 0; $i < $count; $i++ ) {
@@ -277,31 +277,32 @@ class sc_events extends ShortcodeBase {
 						$context['day'] = $startTime->format( 'j' );
 						$context['link'] = htmlentities( $xml->channel->item[ $i ]->link );
 
-						?>    
-						<div class="row event">
-							<div class="col-sm-3 date">								
-								<div class="month"><?= $context['month'] ?></div>
-								<div class="day"><?= $context['day'] ?></div>								
-							</div>
-							<div class="col-sm-8 description">
-								<h3 class="event-title">
-									<a href="<?= $context['link'] ?>">
-									<?= $title ?>
-										
-									</a>
-								</h3>
-								<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>			
-							</div>
-						</div>
-						<?php }
+						?>
+<div class="row event">
+	<div class="col-sm-3 date">
+		<div class="month"><?= $context['month'] ?></div>
+		<div class="day"><?= $context['day'] ?></div>
+	</div>
+	<div class="col-sm-8 description">
+		<h3 class="event-title">
+			<a href="<?= $context['link'] ?>">
+				<?= $title ?>
+
+			</a>
+		</h3>
+		<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>
+	</div>
+</div>
+<?php }
 						endif; ?>
-					
-					<p>
-						<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
-					</p>
-					<div class="clearfix"></div>
-		
-				<?php
+
+<p>
+	<a class="btn btn-callout float-right"
+		href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
+</p>
+<div class="clearfix"></div>
+
+<?php
 				return ob_get_clean();
 			}
 		}
@@ -440,76 +441,78 @@ class sc_contactblock extends ShortcodeBase{
 		ob_start();
 
 		if(empty($footer)){
-		?>	
-		
-		<table class="table table-hover">
-			<tbody>
-				<?php if(!empty($data['contact_Hours'][0])) { ?>
-				<tr>
-					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-clock-o"><span class="sr-only">Phone</span></i>
-					</th>
-					<td><?= $data['contact_Hours'][0] ?></td>
-				</tr>
-				<?php } ?>
-				<?php if(!empty($data['contact_phone'][0])) { ?>
-				<tr>
-					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
-					</th>
-					<td><a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a></td>
-				</tr>
-				<?php } ?>
-				<?php if(!empty($data['contact_fax'][0])) { ?>
-				<tr>
-					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-fax"><span class="sr-only">Fax</span></i>
-					</th>
-					<td><?= $data['contact_fax'][0] ?></td>
-				</tr>
-				<?php } ?>
-				<?php if(!empty($data['contact_email'][0])) { ?>
-				<tr>
-					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
-					</th>
-					<td><a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a></td>
-				</tr>
-				<?php } ?>
-				<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
-				<tr>
-					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
-					</th>
-					<td><a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a></td>
-				</tr>
-				<?php } ?>
-			</tbody>
-		</table>
-		
-		<?php
+		?>
+
+<table class="table table-hover">
+	<tbody>
+		<?php if(!empty($data['contact_Hours'][0])) { ?>
+		<tr>
+			<th scope="row">
+				<i class="fa fa-lg fa-fw fa-clock-o"><span class="sr-only">Phone</span></i>
+			</th>
+			<td><?= $data['contact_Hours'][0] ?></td>
+		</tr>
+		<?php } ?>
+		<?php if(!empty($data['contact_phone'][0])) { ?>
+		<tr>
+			<th scope="row">
+				<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
+			</th>
+			<td><a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a></td>
+		</tr>
+		<?php } ?>
+		<?php if(!empty($data['contact_fax'][0])) { ?>
+		<tr>
+			<th scope="row">
+				<i class="fa fa-lg fa-fw fa-fax"><span class="sr-only">Fax</span></i>
+			</th>
+			<td><?= $data['contact_fax'][0] ?></td>
+		</tr>
+		<?php } ?>
+		<?php if(!empty($data['contact_email'][0])) { ?>
+		<tr>
+			<th scope="row">
+				<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
+			</th>
+			<td><a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a></td>
+		</tr>
+		<?php } ?>
+		<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
+		<tr>
+			<th scope="row">
+				<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
+			</th>
+			<td><a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>"
+					class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a></td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+
+<?php
 			} else{
-		?> 
-			<P>
-				<?php if(!empty($data['contact_phone'][0])) { ?>
-				
-					<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
-					<a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a><br />
-				<?php } ?>
-				<?php if(!empty($data['contact_email'][0])) { ?>
-				
-					<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
-					<a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a><br />
-				<?php } ?>
-				<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
-				
-					<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
-					<a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
-				<?php } ?>
-			</P>
+		?>
+<P>
+	<?php if(!empty($data['contact_phone'][0])) { ?>
+
+	<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
+	<a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a><br />
+	<?php } ?>
+	<?php if(!empty($data['contact_email'][0])) { ?>
+
+	<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
+	<a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a><br />
+	<?php } ?>
+	<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
+
+	<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
+	<a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>"
+		class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
+	<?php } ?>
+</P>
 
 
-		<?php
+<?php
 			}
 		return ob_get_clean();
 	}
@@ -592,51 +595,61 @@ class social_media extends ShortcodeBase{
 		ob_start();
 		?>
 
-		<div class="card-columns social mt-3">
-			<?php if (!empty($attr['facebook'])) { ?>
-			<div class="card">
-				<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>"><span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="sr-only">&emsp;Facebook</span></a>
-			</div>
-			<?php } if (!empty($attr['flickr'])) { ?>
-			<div class="card">
-				<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>"><span class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span></a>
-			</div>
-			<?php } if (!empty($attr['google_plus'])) { ?>
-			<div class="card">
-				<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>"><span class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span></a>
-			</div>
-			<?php } if (!empty($attr['instagram'])) { ?>
-			<div class="card">
-				<a class="btn btn-block instagram text-lg-center" href="<?= $attr['instagram'] ?>"><span class="fa fa-instagram fa-fw fa-lg"></span><span class="sr-only">&emsp;Instagram</span></a>
-			</div>
-			<?php } if (!empty($attr['linkedin'])) { ?>
-			<div class="card">
-				<a class="btn btn-block linkedin text-lg-center" href="<?= $attr['linkedin'] ?>"><span class="fa fa-linkedin fa-fw fa-lg"></span><span class="sr-only">&emsp;LinkedIn</span></a>
-			</div>
-			<?php } if (!empty($attr['pinterest'])) { ?>
-			<div class="card">
-				<a class="btn btn-block pinterest text-lg-center" href="<?= $attr['pinterest'] ?>"><span class="fa fa-pinterest fa-fw fa-lg"></span><span class="sr-only">&emsp;Pinterest</span></a>
-			</div>
-			<?php } if (!empty($attr['twitter'])) { ?>
-			<div class="card">
-				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>"><span class="fa fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span></a>
-			</div>
-			<?php } if (!empty($attr['tumblr'])) { ?>
-			<div class="card">
-				<a class="btn btn-block tumblr text-lg-center" href="<?= $attr['tumblr'] ?>"><span class="fa fa-tumblr fa-fw fa-lg"></span><span class="sr-only">&emsp;Tumblr</span></a>
-			</div>
-			<?php } if (!empty($attr['vimeo'])) { ?>
-			<div class="card">
-				<a class="btn btn-block vimeo text-lg-center" href="<?= $attr['vimeo'] ?>"><span class="fa fa-vimeo fa-fw fa-lg"></span><span class="sr-only">&emsp;Vimeo</span></a>
-			</div>
-			<?php } if (!empty($attr['youtube'])) { ?>
-			<div class="card">
-				<a class="btn btn-block youtube text-lg-center" href="<?= $attr['youtube'] ?>"><span class="fa fa-youtube fa-fw fa-lg"></span><span class="sr-only">&emsp;YouTube</span></a>
-			</div>
-			<?php } ?>
-		</div>		
-		
-		<?php
+<div class="card-columns social mt-3">
+	<?php if (!empty($attr['facebook'])) { ?>
+	<div class="card">
+		<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>"><span
+				class="fa fa-facebook-official fa-fw fa-lg"></span><span class="sr-only">&emsp;Facebook</span></a>
+	</div>
+	<?php } if (!empty($attr['flickr'])) { ?>
+	<div class="card">
+		<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>"><span
+				class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span></a>
+	</div>
+	<?php } if (!empty($attr['google_plus'])) { ?>
+	<div class="card">
+		<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>"><span
+				class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span></a>
+	</div>
+	<?php } if (!empty($attr['instagram'])) { ?>
+	<div class="card">
+		<a class="btn btn-block instagram text-lg-center" href="<?= $attr['instagram'] ?>"><span
+				class="fa fa-instagram fa-fw fa-lg"></span><span class="sr-only">&emsp;Instagram</span></a>
+	</div>
+	<?php } if (!empty($attr['linkedin'])) { ?>
+	<div class="card">
+		<a class="btn btn-block linkedin text-lg-center" href="<?= $attr['linkedin'] ?>"><span
+				class="fa fa-linkedin fa-fw fa-lg"></span><span class="sr-only">&emsp;LinkedIn</span></a>
+	</div>
+	<?php } if (!empty($attr['pinterest'])) { ?>
+	<div class="card">
+		<a class="btn btn-block pinterest text-lg-center" href="<?= $attr['pinterest'] ?>"><span
+				class="fa fa-pinterest fa-fw fa-lg"></span><span class="sr-only">&emsp;Pinterest</span></a>
+	</div>
+	<?php } if (!empty($attr['twitter'])) { ?>
+	<div class="card">
+		<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>"><span
+				class="fa fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span></a>
+	</div>
+	<?php } if (!empty($attr['tumblr'])) { ?>
+	<div class="card">
+		<a class="btn btn-block tumblr text-lg-center" href="<?= $attr['tumblr'] ?>"><span
+				class="fa fa-tumblr fa-fw fa-lg"></span><span class="sr-only">&emsp;Tumblr</span></a>
+	</div>
+	<?php } if (!empty($attr['vimeo'])) { ?>
+	<div class="card">
+		<a class="btn btn-block vimeo text-lg-center" href="<?= $attr['vimeo'] ?>"><span
+				class="fa fa-vimeo fa-fw fa-lg"></span><span class="sr-only">&emsp;Vimeo</span></a>
+	</div>
+	<?php } if (!empty($attr['youtube'])) { ?>
+	<div class="card">
+		<a class="btn btn-block youtube text-lg-center" href="<?= $attr['youtube'] ?>"><span
+				class="fa fa-youtube fa-fw fa-lg"></span><span class="sr-only">&emsp;YouTube</span></a>
+	</div>
+	<?php } ?>
+</div>
+
+<?php
 		return ob_get_clean();
 	}
 	
@@ -677,21 +690,23 @@ class sc_iframe extends ShortcodeBase{
 
 		ob_start();
 		?>
-			<?php
+<?php
 				if (strpos($attr['if_url'], 'youtube') !== false) {
 			?>
 
-			<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" allowfullscreen></iframe>
+<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0"
+	scrolling="no" allowfullscreen></iframe>
 
-			<?php
+<?php
 				} else {
 			?>
-				<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" ></iframe>
-			<?php
+<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0"
+	scrolling="no"></iframe>
+<?php
 				}
 			?>
 
-		<?php
+<?php
 		return ob_get_clean();
 	}
 
@@ -757,40 +772,45 @@ class sc_countdown extends ShortcodeBase{
 
 		?>
 
-		<script>
-			// Set the date we're counting down to
-			var countDownDate = new Date("<?= $attr['countdown_date'] ?>").getTime();
+<script>
+	// Set the date we're counting down to
+	var countDownDate = new Date("<?= $attr['countdown_date'] ?>").getTime();
 
-			// Update the count down every 1 second
-			var x = setInterval(function() {
+	// Update the count down every 1 second
+	var x = setInterval(function () {
 
-				// Get todays date and time
-				var now = new Date().getTime();
+		// Get todays date and time
+		var now = new Date().getTime();
 
-				// Find the distance between now and the count down date
-				var distance = countDownDate - now;
+		// Find the distance between now and the count down date
+		var distance = countDownDate - now;
 
-				// Time calculations for days, hours, minutes and seconds
-				var days = Math.floor(distance / (1000 * 60 * 60 * 24 ));
-				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		// Time calculations for days, hours, minutes and seconds
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-				// Display the result in the element with id="countdown"
-				document.getElementById("countdown").innerHTML = "<div class='col day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='col hour'><span class='num'>" + hours + "</span><span class='word'>Hrs</span></div>" + "<div class='col min'><span class='num'>" + minutes + "</span><span class='word'>Mins</span></div>" + "<div class='col sec'><span class='num'>" + seconds + "</span><span class='word'>Secs</span></div>";
+		// Display the result in the element with id="countdown"
+		document.getElementById("countdown").innerHTML = "<div class='col day'><span class='num'>" + days +
+			"</span><span class='word'>Days</span></div>" + "<div class='col hour'><span class='num'>" + hours +
+			"</span><span class='word'>Hrs</span></div>" + "<div class='col min'><span class='num'>" + minutes +
+			"</span><span class='word'>Mins</span></div>" + "<div class='col sec'><span class='num'>" + seconds +
+			"</span><span class='word'>Secs</span></div>";
 
-				// If the count down is finished, write some text 
-				if (distance < 0) {
-					clearInterval(x);
-					document.getElementById("countdown").innerHTML = "<h3 style='color: white; text-align: center;'>We are now open</h3>";
-					}
-			}, 1000);
-		</script>		
-		
-		<?php
+		// If the count down is finished, write some text 
+		if (distance < 0) {
+			clearInterval(x);
+			document.getElementById("countdown").innerHTML =
+				"<h3 style='color: white; text-align: center;'>We are now open</h3>";
+		}
+	}, 1000);
+</script>
+
+<?php
 
 		echo '<h3 style="text-align: center;color:white;background: black;margin-bottom: 0px;padding-top: 10px;">'.$attr["countdown_title"] .'</h3><div id="countdown" class="countdown"></div>';
-      				
+
 	}
 
 }
@@ -800,9 +820,9 @@ class sc_countdown extends ShortcodeBase{
  */
 class sc_quizjs extends ShortCodeBase{
 	public
-	$name = 'QuizJS', // The name of the shortcode.
-	$command = 'QuizJS', // The command used to call the shortcode.
-	$description = 'Adds JS for Volunteer Quiz', // The description of the shortcode.
+	$name = 'QuizVUCF', // The name of the shortcode.
+	$command = 'QuizVUCF', // The command used to call the shortcode.
+	$description = 'Adds JS, Google Analytics, & style for Volunteer Quiz', // The description of the shortcode.
 	$callback    = 'callback',
 	$render      = 'render',
 	$closing_tag = false,
@@ -811,8 +831,23 @@ class sc_quizjs extends ShortCodeBase{
 
 	public static function callback( $attr, $content = null) {
 		?>
-			<script type="text/javascript" src="js/quizselect.min"></script>
-		<?php
+<script type="text/javascript" src="js/quizselect.min.js"></script>
+<link rel="stylesheet" href="css/buzzstyle.css"/>
+
+<!-- Bonnieblue wanted google analytics, so we have our script controlled by OSI so marketing can track the impact of our work -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147457642-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-147457642-1');
+</script>
+
+<?php
 	}
 }
 

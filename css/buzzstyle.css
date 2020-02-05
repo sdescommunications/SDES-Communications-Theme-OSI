@@ -1,0 +1,59 @@
+.zoom-effect {
+    overflow: hidden;
+}
+.zoom-effect img { 
+    transition: transform .25s ease;
+}
+.zoom-effect:hover img {
+    transform: scale(1.112);
+}
+.disabled img {
+    opacity: 0.35;
+}
+.quiz-choice {
+    cursor: pointer;
+}
+.card-body {
+    text-align: center;
+}
+ul {
+    list-style: none;
+}
+.result {
+    color: #fff;
+}
+.result a{
+   color: #fff;
+}
+.resultComplete {
+   background: #42abaa; 
+}
+h1 {
+    text-align: center;
+    font-weight: bolder;
+}
+.bg-light::after {
+    background-color: #000;
+}
+.top-bar-visual {
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+button{
+    margin:auto;
+    width: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+body{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
