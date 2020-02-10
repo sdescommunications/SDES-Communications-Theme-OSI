@@ -840,7 +840,7 @@ class sc_quizjs extends ShortCodeBase{
 		//got the scripts & styles to load !!! YwY
 		wp_enqueue_script('quizselect-min', $js, array(), '1.0.0', true );
 		
-		wp_enqueue_style('buzzstyle',$css, array('bootstrap'), '1.0.0', true );
+		wp_enqueue_style('buzzstyle',$css, array(), '1.0.0', 'all');
 		
 		
 

@@ -15,6 +15,10 @@
 }
 .card-body {
     text-align: center;
+    /*Added the padding and font-size for clarity and usability YwY*/
+    padding: 1.25rem;
+    box-sizing: border-box;
+    font-size:16px;
 }
 ul {
     list-style: none;
@@ -26,7 +30,7 @@ ul {
    color: #fff;
 }
 .resultComplete {
-   background: #42abaa; 
+   background:  #95200f; 
 }
 h1 {
     text-align: center;
@@ -35,6 +39,8 @@ h1 {
 .bg-light::after {
     background-color: #000;
 }
+/* - YwY 
+Removed the .top-bar because it moves behind the content and messes up the view and style
 .top-bar-visual {
     background-color: #000;
     color: #fff;
@@ -43,7 +49,9 @@ h1 {
     margin: 0;
     padding: 0;
     position: fixed;
+    display: none;
 }
+*/
 button{
     margin:auto;
     width: auto;
@@ -53,7 +61,8 @@ button{
     align-content: center;
 }
 body{
-    display: flex;
+    
+    display: block;/* - YwY Changed from flex to literally anything else, because flex ruins the css*/
     margin: 0;
     padding: 0;
 }
