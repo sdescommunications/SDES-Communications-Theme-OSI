@@ -722,7 +722,7 @@ class sc_redirect extends ShortcodeBase{
 	$closing_tag = false,
 	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
 	$params      = array(
-		array(			
+		array(				
 			'name'      => 'Redirect Url',
 			'id'        => 'redirect_url',
 			'help_text' => '',
@@ -736,9 +736,9 @@ class sc_redirect extends ShortcodeBase{
 		echo 'Seems like you have JavaScript turned off please go to <a href="'.$attr['redirect_url'].'">'.$attr['redirect_url'].'</a>';		
 		
 		echo '<script type="text/javascript">
-           		window.location = "'.$attr['redirect_url'].'"
-      		</script>';
-      				
+        window.location = "'.$attr['redirect_url'].'"
+		</script>';
+
 	}
 
 }
@@ -830,9 +830,16 @@ class sc_quizjs extends ShortCodeBase{
 	$params      = array();
 
 	public static function callback( $attr, $content = null) {
+		
+		$base =  get_stylesheet_directory_uri();
+		//got the scripts & styles to load !!! YwY
+		wp_enqueue_script('quizselect', $base .'/js/quizselect.min.js', array('jquery','bootstrap'), null, true);
+		
+		wp_enqueue_style('buzzstyle',$base.'/css/buzzstyle.css',array('bootstrap'),false, NULL, 'all');
+		
+		
+
 		?>
-<script type="text/javascript" src="js/quizselect.min.js"></script>
-<link rel="stylesheet" href="css/buzzstyle.css"/>
 
 <!-- Bonnieblue wanted google analytics, so we have our script controlled by OSI so marketing can track the impact of our work -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147457642-1"></script>
