@@ -831,11 +831,16 @@ class sc_quizjs extends ShortCodeBase{
 
 	public static function callback( $attr, $content = null) {
 		
-		$base =  get_stylesheet_directory_uri();
-		//got the scripts & styles to load !!! YwY
-		wp_enqueue_script('quizselect', $base .'/js/quizselect.min.js', array('jquery','bootstrap'), null, true);
+		$base =  get_template_directory_uri();
 		
-		wp_enqueue_style('buzzstyle',$base.'/css/buzzstyle.css',array('bootstrap'),false, NULL, 'all');
+		$js = $base.'/js/quizselect.min.js';
+		$css = $base.'/css/buzzstyle.css';
+		
+		
+		//got the scripts & styles to load !!! YwY
+		wp_enqueue_script('quizselect-min', $js, array(), '1.0.0', true );
+		
+		wp_enqueue_style('buzzstyle',$css, array('bootstrap'), '1.0.0', true );
 		
 		
 
