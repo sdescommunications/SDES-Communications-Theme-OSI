@@ -844,22 +844,39 @@ class sc_quizjs extends ShortCodeBase{
 		
 		
 
-		?>
-
-<!-- Bonnieblue wanted google analytics, so we have our script controlled by OSI so marketing can track the impact of our work -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147457642-1"></script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-
-	function gtag() {
-		dataLayer.push(arguments);
+		
 	}
-	gtag('js', new Date());
+}
+/*
+ * OSI Shortcodes
+ */
+class sc_quizOSI extends ShortCodeBase{
+	public
+	$name = 'QuizOSI', // The name of the shortcode.
+	$command = 'QuizOSI', // The command used to call the shortcode.
+	$description = 'Adds JS, Google Analytics, & style for OSI Quiz', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = false, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array();
 
-	gtag('config', 'UA-147457642-1');
-</script>
+	public static function callback( $attr, $content = null) {
+		
+		$base =  get_template_directory_uri();
+		
+		$js = $base.'/js/osiquiz.min.js';
+		$css = $base.'/css/osiquiz.min.css';
+		
+		
+		//got the scripts & styles to load !!! YwY
+		wp_enqueue_script('osiquiz-min', $js, array(), '1.0.0', true );
+		
+		wp_enqueue_style('osiquiz-min',$css, array(), '1.0.0', 'all');
+		
+		
 
-<?php
+		
 	}
 }
 
@@ -874,6 +891,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_redirect',
 		__NAMESPACE__.'\sc_countdown',
 		__NAMESPACE__.'\sc_quizjs',
+		__NAMESPACE__.'\sc_quizOSI'
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
