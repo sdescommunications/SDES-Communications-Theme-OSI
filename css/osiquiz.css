@@ -1,31 +1,3 @@
-
-/* - YwY 
-Removed the .top-bar because it moves behind the content and messes up the view and style
-.top-bar-visual {
-    background-color: #000;
-    color: #fff;
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    display: none;
-}
-*/
-button{
-    margin:auto;
-    width: auto;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-body{
-    
-    display: block;/* - YwY Changed from flex to literally anything else, because flex ruins the css*/
-    margin: 0;
-    padding: 0;
-}
 .zoom-effect {
     overflow: hidden
 }
@@ -67,16 +39,16 @@ ul {
 }
 
 .result a {
-    color: #fff;
+    color: #000
 }
 
 .result a:hover {
-    color: #fff;
+    color: #000;
     opacity: .7
 }
 
 .resultComplete {
-    background:#95200f; 
+    background: #000
 }
 
 h1 {
@@ -89,7 +61,7 @@ h1 {
 }
 
 .top-bar-visual {
-    background-color: #95200f; 
+    background-color: #000;
     width: 100%;
     height: 1em;
     margin: 0;
@@ -106,21 +78,21 @@ h1 {
     width: 33%;
     height: 1em;
     float: left;
-    background-color: #95200f; 
+    background-color: #202020
 }
 
 .bar-2 {
     width: 33%;
     height: 1em;
     float: left;
-    background-color: #ffc904;
+    background-color: #ffc904
 }
 
 .bar-3 {
     width: 33%;
     height: 1em;
     float: left;
-    background-color: #012c7b;
+    background-color: #907300;
 }
 
 .footer {
