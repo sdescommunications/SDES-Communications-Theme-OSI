@@ -533,7 +533,6 @@ header .header-break img {
 
 .navbar-vp .navbar-nav .megamenu .header-link {
   color: #292b2c !important;
-  pointer-events: none;
   white-space: nowrap;
   display: block;
 }
@@ -2051,7 +2050,6 @@ h3 a[href$='.pptx'] {
 
 .navbar-dept .navbar-nav .megamenu .header-link {
   color: #292b2c !important;
-  pointer-events: none;
   white-space: nowrap;
   display: block;
 }
