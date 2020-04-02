@@ -287,7 +287,7 @@ class Alert extends CustomPostType {
 			
 			?>
 			<div class="alert <?= $context['css_classes'] ?>">
-				<span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times"></i></button>
 				<strong><?= $context['title'] ?></strong>
 				<?= $context['message'] ?>
 				
