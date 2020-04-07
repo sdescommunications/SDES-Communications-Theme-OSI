@@ -683,7 +683,14 @@ class sc_iframe extends ShortcodeBase{
 			'help_text' => '',
 			'type'      => 'text',
 			),
-		
+		array(
+			'name'			=> 'Scrollable',
+			'id'				=> 'if_scroll',
+			'help_text' => '',
+			'type'			=> 'checkbox',
+			'default'		=> false,
+			),
+
 		);
 
 	public static function callback( $attr, $content = '' ) {
@@ -701,7 +708,7 @@ class sc_iframe extends ShortcodeBase{
 				} else {
 			?>
 <iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0"
-	scrolling="no"></iframe>
+	scrolling="<?= $attr['if_scroll'] ? "yes" : "no" ?>"></iframe>
 <?php
 				}
 			?>
