@@ -887,6 +887,37 @@ class sc_quizOSI extends ShortCodeBase{
 	}
 }
 
+/*
+ * Generate a relative 'back' button that goes up one menu level
+ * If the post has no parent, returns to home page
+ */
+class sc_backButton extends ShortCodeBase {
+	public
+	$name = 'Back Button',
+	$command = 'backbutton',
+	$description = 'Go up one menu level',
+	$callback = 'callback',
+	$render = 'render',
+	$closing_tag = false,
+	$wysiwyg = true,
+	$params = array();
+
+	public static function callback() {
+		$post = get_post();
+
+		if($post->post_parent != 0) {
+			$url = get_permalink($post->post_parent);
+		} else {
+			$url = get_home_url();
+		}
+		?>
+
+		<a class="btn btn-callout float-right mt-3" href="<?= $url ?>">Back</a>
+
+		<?php
+	}
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
@@ -898,7 +929,8 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_redirect',
 		__NAMESPACE__.'\sc_countdown',
 		__NAMESPACE__.'\sc_quizjs',
-		__NAMESPACE__.'\sc_quizOSI'
+		__NAMESPACE__.'\sc_quizOSI',
+		__NAMESPACE__.'\sc_backButton'
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
