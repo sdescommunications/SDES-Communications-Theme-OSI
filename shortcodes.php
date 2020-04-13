@@ -912,7 +912,7 @@ class sc_backButton extends ShortCodeBase {
 		}
 		?>
 
-		<a class="btn btn-callout float-right mt-3" href="<?= $url ?>">Back</a>
+		<a class="btn btn-callout float-right mt-3" href="<?= $url ?>">< Back</a>
 
 		<?php
 	}
