@@ -960,6 +960,7 @@ class Contact extends CustomPostType {
 		// Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
 		$default_order   = null,
+		$publicly_queryable  = false, // Disable front-end view of this post type
 
 		$calculated_columns = array(), // Calculate values within custom_column_echo_data.
 		$sc_interface_fields = null; // Fields for shortcodebase interface (false hides from list, null shows only the default fields).
