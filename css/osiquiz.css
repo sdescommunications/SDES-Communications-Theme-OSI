@@ -15,10 +15,11 @@
 }
 
 .quiz-choice {
-    cursor: pointer
+    cursor: pointer;
 }
 
 .card-body {
+    font-family: "archer_mediumregular", Georgia, sans-serif !important;
     text-align: center;
     padding: 1.25rem;
     box-sizing: border-box;
@@ -32,6 +33,10 @@ ul {
 
 .result {
     color: #fff
+}
+.result h1.mb-4, .result h2, .result h4{
+    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-weight: bolder !important;
 }
 
 .result h4 {
@@ -51,9 +56,10 @@ ul {
     background: #000
 }
 
-h1 {
+.display-4 {
+    font-family: "gotham_boldregular", Arial, sans-serif !important;
     text-align: center;
-    font-weight: bolder
+    font-weight: bolder;
 }
 
 .bg-light::after {
