@@ -910,11 +910,14 @@ class sc_backButton extends ShortCodeBase {
 		} else {
 			$url = get_home_url();
 		}
+		ob_start();
 		?>
 
 		<a class="btn btn-callout float-right mt-3" href="<?= $url ?>">< Back</a>
 
 		<?php
+		return ob_get_clean();
+
 	}
 }
 
