@@ -1138,6 +1138,31 @@ class FAQ extends CustomPostType {
 	}
 
 /**
+ * A record item for archival display
+ */
+class Records extends CustomPostType {
+	public
+	$name           = 'record',
+	$plural_name    = 'Records',
+	$singular_name  = 'Record',
+	$add_new_item   = 'Add New Record',
+	$edit_item      = 'Edit Record',
+	$new_item       = 'New Record',
+	$public         = true,  // I dunno...leave it true
+	$use_title      = true,  // Title field
+	$use_editor     = true,  // WYSIWYG editor, post content field
+	$use_revisions  = true,  // Revisions on post content and titles
+	$use_thumbnails = false,  // Featured images
+	$use_order      = true, // Wordpress built-in order meta data
+	$use_metabox    = true, // Enable if you have custom fields to display in admin
+	$use_shortcode  = true, // Auto generate a shortcode for the post type
+		                         // (see also objectsToHTML and toHTML methods).
+	$taxonomies     = array( 'post_tag', 'org_groups' ),
+	$menu_icon      = 'dashicons-media-text',
+	$built_in       = false;
+}
+
+/**
  * Register custom post types when the theme is initialized.
  * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init WP-Codex: init action hook.
  */
@@ -1149,6 +1174,7 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\Billboard',
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
+		__NAMESPACE__.'\Records',
 		__NAMESPACE__.'\Contact',
 		__NAMESPACE__.'\FAQ',
 		));
