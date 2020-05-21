@@ -62,7 +62,8 @@ abstract class CustomPostType {
 		// array( 'heading'=>'A Column Heading Text', 'column_name'=>'id_of_the_column', 'order' => 1000 'sortable' => true ),
 	), // Calculate values within custom_column_echo_data.
 	$sc_interface_fields = null, // Fields for shortcodebase interface (false hides from list, null shows only the default fields).
-	$publicly_queryable  = true; // Whether the front end can query this post type
+	$publicly_queryable  = true, // Whether the front end can query this post type
+	$supports = array( 'title', 'editor' ); // Which editor features are supported for this post type
 
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
@@ -411,7 +412,7 @@ abstract class CustomPostType {
 	 * @see http://codex.wordpress.org/Function_Reference/register_post_type WP-Codex: register_post_type()
 	 * @see http://codex.wordpress.org/Function_Reference/add_shortcode WP-Codex: add_shortcode()
 	 * @uses labels(), supports(), options(), custom_columns_get_all(), register_custom_columns()
-	 * @uses $public, $taxonomies, $built_in, $use_order, $name, $use_shortcode, $publicly_queryable
+	 * @uses $public, $taxonomies, $built_in, $use_order, $name, $use_shortcode, $publicly_queryable, $supports
 	 * @param Array $args Override the registration args passed to register_post_type.
 	 * */
 	public function register( $args = array() ) {
@@ -424,6 +425,7 @@ abstract class CustomPostType {
 			'_builtin'   => $this->options( 'built_in' ),
 			'menu_icon'  => $this->options( 'menu_icon' ),
 			'publicly_queryable' => $this->options( 'publicly_queryable' ),
+			'supports' 	 => $this->options( 'supports' ),
 			);
 		if ( $this->options( 'use_order' ) ) {
 			$registration = array_merge( $registration, array( 'hierarchical' => true ) );

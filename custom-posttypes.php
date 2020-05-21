@@ -1159,7 +1159,8 @@ class Records extends CustomPostType {
 		                         // (see also objectsToHTML and toHTML methods).
 	$taxonomies     = array( 'post_tag', 'org_groups' ),
 	$menu_icon      = 'dashicons-media-text',
-	$built_in       = false;
+	$built_in       = false,
+	$supports				= array( 'title', 'fields' );
 
 	public function fields() {
 		$prefix = $this->options( 'name' ).'_';
