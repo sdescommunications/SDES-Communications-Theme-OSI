@@ -1150,7 +1150,7 @@ class Records extends CustomPostType {
 	$new_item       = 'New Record',
 	$public         = true,  // I dunno...leave it true
 	$use_title      = true,  // Title field
-	$use_editor     = true,  // WYSIWYG editor, post content field
+	$use_editor     = false,  // WYSIWYG editor, post content field
 	$use_revisions  = true,  // Revisions on post content and titles
 	$use_thumbnails = false,  // Featured images
 	$use_order      = true, // Wordpress built-in order meta data
@@ -1159,8 +1159,7 @@ class Records extends CustomPostType {
 		                         // (see also objectsToHTML and toHTML methods).
 	$taxonomies     = array( 'post_tag', 'org_groups' ),
 	$menu_icon      = 'dashicons-media-text',
-	$built_in       = false,
-	$supports				= array( 'title', 'fields' );
+	$built_in       = false;
 
 	public function fields() {
 		$prefix = $this->options( 'name' ).'_';
