@@ -1160,6 +1160,47 @@ class Records extends CustomPostType {
 	$taxonomies     = array( 'post_tag', 'org_groups' ),
 	$menu_icon      = 'dashicons-media-text',
 	$built_in       = false;
+
+	public function fields() {
+		$prefix = $this->options( 'name' ).'_';
+		return array(
+			array(
+				'name' => 'Description',
+				'descr' => '',
+				'id' => $prefix.'description',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Date',
+				'descr' => '',
+				'id' => $prefix.'date',
+				'type' => 'date',
+			)
+		);
+	}
+
+	public function metabox() {
+		if ( $this->options( 'use_metabox' ) ) {
+			return array(
+				'id'       => 'custom_'.$this->options( 'name' ).'_metabox',
+				'title'    => __( $this->options( 'singular_name' ).' Fields' ),
+				'page'     => $this->options( 'name' ),
+				'context'  => 'after_title',
+				'priority' => 'high',
+				'fields'   => $this->fields(),
+				);
+		}
+		return null;
+	}
+
+	public function register_metaboxes() {
+		remove_meta_box( 'postimagediv', $this->name, 'side' );
+		add_meta_box('postimagediv', __( "{$this->singular_name} Media" ),
+			'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
+		CustomPostType::register_meta_boxes_after_title();
+
+		parent::register_metaboxes();
+	}
 }
 
 /**
