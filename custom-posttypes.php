@@ -1165,6 +1165,12 @@ class Records extends CustomPostType {
 		$prefix = $this->options( 'name' ).'_';
 		return array(
 			array(
+				'name' => 'File',
+				'descr' => '',
+				'id' => $prefix.'file',
+				'type' => 'doc',
+			),
+			array(
 				'name' => 'Description',
 				'descr' => '',
 				'id' => $prefix.'description',
@@ -1194,11 +1200,7 @@ class Records extends CustomPostType {
 	}
 
 	public function register_metaboxes() {
-		remove_meta_box( 'postimagediv', $this->name, 'side' );
-		add_meta_box('postimagediv', __( "{$this->singular_name} Media" ),
-			'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
 		CustomPostType::register_meta_boxes_after_title();
-
 		parent::register_metaboxes();
 	}
 }

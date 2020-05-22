@@ -18,6 +18,7 @@ use SDES\Metafields\SelectMetaField as SelectMetaField;
 use SDES\Metafields\MultiselectMetaField as MultiselectMetaField;
 use SDES\Metafields\RadioMetaField as RadioMetaField;
 use SDES\Metafields\CheckboxListMetaField as CheckboxListMetaField;
+use SDES\Metafields\PDFMetaField as PDFMetaField;
 use SDES\Metafields\FileMetaField as FileMetaField;
 use SDES\Metafields\EditorMetaField as EditorMetaField;
 
@@ -191,6 +192,9 @@ class SDES_Metaboxes {
 			case 'checkbox':
 			case 'checkbox_list':
 			$field_obj = new CheckboxListMetaField( $field );
+			break;
+			case 'doc':
+			$field_obj = new PDFMetaField( $field );
 			break;
 			case 'file':
 			$field['post_id'] = $post_id;

@@ -247,6 +247,25 @@ class CheckboxListMetaField extends ChoicesMetaField {
 	}
 }
 
+/**
+ * Application/pdf upload element
+ */
+class PDFMetaField extends MetaField {
+	function input_html() {
+		$attachment = get_post( $this->value );
+		ob_start(); ?>
+		<?php if ( !empty( $this->value ) ) echo htmlentities( $this->value ) ?>
+			<input 
+				type="file" 
+				id="<?php echo htmlentities( $this->id )?>" 
+				name="<?php echo htmlentities( $this->id )?>"
+				size="25" 
+			/>
+		<?php
+		return ob_get_clean();
+	}
+}
+
 class FileMetaField extends MetaField {
 	function __construct( $attr ) {
 		parent::__construct( $attr );
