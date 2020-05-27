@@ -122,8 +122,8 @@ class SDES_Metaboxes {
 		if ( $new !== '' and $new !== null and $new != $old ) {
 			// Update if new is not empty and is not the same value as old.
 			update_post_meta( $post_id, $field['id'], $new );
-		} elseif ( ( $new === '' or is_null( $new ) ) and $old ) {
-			// Delete if we're sending a new null value and there was an old value.
+		} elseif ( ( ( $new === '' or is_null( $new ) ) and $old ) and $field['type'] !== 'doc') {
+			// Delete the old value if a null is sent and the field is not a file upload 
 			delete_post_meta( $post_id, $field['id'], $old );
 		}
 		// Otherwise we do nothing, field stays the same.
