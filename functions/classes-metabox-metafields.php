@@ -252,14 +252,15 @@ class CheckboxListMetaField extends ChoicesMetaField {
  */
 class PDFMetaField extends MetaField {
 	function input_html() {
-		$attachment = get_post( $this->value );
 		ob_start(); 
 	?>
-	<?php 
-		// Display file name if exists
-		if ( !empty( $this->value ) ) {
-			echo htmlentities( $this->value ) . "<br>";
+	<?php
+		if ( isset( $this->value ) ) {
+			$array = $this->value;
+			$filename = basename( $array['url'] );
+			echo '<a href="' . $array['url'] . '">' . $filename . "</a><br />";
 		}
+	
 	?>
 		<input 
 			type="file" 
