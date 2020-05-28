@@ -113,8 +113,9 @@ class SDES_Metaboxes {
 			foreach ( $meta_box['fields'] as $field ) {
 				if ( $field['type'] === 'doc' ) {
 					static::save_files( $post_id, $field );
+				} else {
+					static::save_default( $post_id, $field );
 				}
-				static::save_default( $post_id, $field );
 			}
 		}
 	}
@@ -127,20 +128,30 @@ class SDES_Metaboxes {
 		if( !empty( $_FILES['record_file']['name'] ) ) {
 			$accepted_filetypes = array( 'application/pdf' );
 			$my_filetype = wp_check_filetype( basename ( $_FILES['record_file']['name'] ) )['type'];
-			if( in_array( $my_filetype, $accepted_filetypes ) ) {
 
-				// Upload the file to WordPress
-				$upload_info = wp_upload_bits( $_FILES['record_file']['name'], null, file_get_contents( $_FILES['record_file']['tmp_name'] ) );
-
-				// Check for upload errors
-				if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
-					wp_die( 'Error during upload: '. $upload_info['error'] );
-				} else {
-					// Add/Update the file field
-					update_post_meta( $post_id, $field['id'], $upload_info );
-				}
-			} else {
+			// Enforce filetype and size limitations
+			if( !in_array( $my_filetype, $accepted_filetypes ) ) {
 				wp_die( "This filetype is not supported" );
+				return;
+			}
+			if ( $_FILES['record_file']['size'] > 10485760 ) {
+				wp_die( "This file is too large" );
+				return;
+			}
+
+			// Upload the file to WordPress
+			$upload_info = wp_upload_bits( $_FILES['record_file']['name'], null, file_get_contents( $_FILES['record_file']['tmp_name'] ) );
+
+			// Check for upload errors
+			if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
+				wp_die( 'Error during upload: ' . $upload_info['error'] );
+			} else {
+				// Delete old data
+				$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
+				wp_delete_file( $old_file );
+
+				// Add/Update the meta field
+				update_post_meta( $post_id, $field['id'], $upload_info );
 			}
 		}
 	}
