@@ -1203,6 +1203,69 @@ class Records extends CustomPostType {
 		CustomPostType::register_meta_boxes_after_title();
 		parent::register_metaboxes();
 	}
+
+	public function shortcode( $attr ) {
+		$prefix = $this->options( 'name' ).'_';
+		$default_attr = array(
+			'type' => $this->options( 'name' ),
+			'header' => $this->options( 'plural_name' ).' List',
+			'css_classes' => '',
+			'collapse' => false,
+		);
+		
+		if( is_array( $attr ) ) {
+			$attr = array_merge( $default_attr, $attr );
+		} else {
+			$attr = $default_attrs;
+		}
+
+		$args = array( 'classname' => __CLASS__, 'objects_only' => true );
+		$objects = parent::sc_object_list( $attr, $args );
+		$context['objects'] = $objects;
+
+		return static::render_objects_to_html( $context );
+	}
+
+	public function objectsToHTML( $objects, $css_classes ) {
+		$context['objects'] = $objects;
+		return static::render_objects_to_html( $context );
+	}
+
+	protected static function render_objects_to_html( $context ) {
+		ob_start();
+		?>
+			<table class="table table-hover">
+				<tbody>
+					<?php foreach( $context['objects'] as $o ): ?>
+						<?= static::toHTML( $o ) ?>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	public static function toHTML( $post_object ) {
+		$context['record_title'] = get_the_title( $post_object );
+		$context['record_url'] = get_post_meta($post_object->ID, 'record_file', true)['url'];
+		return static::render_to_html( $context );
+	}
+
+	protected static function render_to_html( $context ) {
+		ob_start();
+		?>
+			<tr>
+				<td>
+					<a href="<?= $context['record_url'] ?>">
+						<?= $context['record_title'] ?>
+					</a>
+				<td>
+			</tr>
+		<?php
+
+		return ob_get_clean();
+	}
 }
 
 /**
