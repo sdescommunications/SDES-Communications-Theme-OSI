@@ -1212,7 +1212,7 @@ class Records extends CustomPostType {
 			'css_classes' => '',
 			'collapse' => false,
 		);
-		
+
 		if( is_array( $attr ) ) {
 			$attr = array_merge( $default_attr, $attr );
 		} else {
@@ -1236,6 +1236,11 @@ class Records extends CustomPostType {
 		?>
 			<table class="table table-hover">
 				<tbody>
+				<tr>
+					<th scope="column">Title</th>
+					<th scope="column">Date</th>
+					<th scope="column">Link</th>
+				</tr>
 					<?php foreach( $context['objects'] as $o ): ?>
 						<?= static::toHTML( $o ) ?>
 					<?php endforeach; ?>
@@ -1249,6 +1254,7 @@ class Records extends CustomPostType {
 	public static function toHTML( $post_object ) {
 		$context['record_title'] = get_the_title( $post_object );
 		$context['record_url'] = get_post_meta($post_object->ID, 'record_file', true)['url'];
+		$context['record_date'] = get_post_meta($post_object->ID, 'record_date', true);
 		return static::render_to_html( $context );
 	}
 
@@ -1257,10 +1263,14 @@ class Records extends CustomPostType {
 		?>
 			<tr>
 				<td>
-					<a href="<?= $context['record_url'] ?>">
-						<?= $context['record_title'] ?>
-					</a>
+					<?= $context['record_title'] ?>
+				</td>
 				<td>
+					<?= $context['record_date'] ?>
+				</td>
+				<td>
+					<a href="<?= $context['record_url'] ?>">View</a>
+				</td>
 			</tr>
 		<?php
 
