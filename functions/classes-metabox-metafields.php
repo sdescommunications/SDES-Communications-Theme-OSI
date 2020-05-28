@@ -255,9 +255,9 @@ class PDFMetaField extends MetaField {
 		ob_start(); 
 	?>
 	<?php
-		if ( isset( $this->value ) ) {
+		if ( isset( $this->value ) and !empty( $this->value ) ) {
 			$array = $this->value;
-			$filename = basename( $array['url'] );
+			$filename = wp_basename( $array['url'] );
 			echo '<a href="' . $array['url'] . '">' . $filename . "</a><br />";
 		}
 	
