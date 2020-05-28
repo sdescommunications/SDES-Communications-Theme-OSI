@@ -111,7 +111,36 @@ class SDES_Metaboxes {
 		}
 		if ( $meta_box ) {
 			foreach ( $meta_box['fields'] as $field ) {
+				if ( $field['type'] === 'doc' ) {
+					static::save_files( $post_id, $field );
+				}
 				static::save_default( $post_id, $field );
+			}
+		}
+	}
+
+	/**
+	 * Upload file data to WordPress
+	 */
+	public static function save_files( $post_id, $field ) {
+		// Handle file uploads for record metabox
+		if( !empty( $_FILES['record_file']['name'] ) ) {
+			$accepted_filetypes = array( 'application/pdf' );
+			$my_filetype = wp_check_filetype( basename ( $_FILES['record_file']['name'] ) )['type'];
+			if( in_array( $my_filetype, $accepted_filetypes ) ) {
+
+				// Upload the file to WordPress
+				$upload_info = wp_upload_bits( $_FILES['record_file']['name'], null, file_get_contents( $_FILES['record_file']['tmp_name'] ) );
+
+				// Check for upload errors
+				if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
+					wp_die( 'Error during upload: '. $upload_info['error'] );
+				} else {
+					// Add/Update the file field
+					update_post_meta( $post_id, $field['id'], $upload_info );
+				}
+			} else {
+				wp_die( "This filetype is not supported" );
 			}
 		}
 	}
