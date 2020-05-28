@@ -49,6 +49,17 @@ function enqueue_scripts_and_styles(){
   wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 }
 
+/**
+ * Enable file uploads in custom metafields
+ * 
+ * @see https://developer.wordpress.org/reference/hooks/post_edit_form_tag/
+ * @see https://code.tutsplus.com/articles/attaching-files-to-your-posts-using-wordpress-custom-meta-boxes-part-1--wp-22291
+ */
+add_action( 'post_edit_form_tag' , 'post_edit_form_tag' );
+function post_edit_form_tag( ) {
+   echo ' enctype="multipart/form-data"';
+}
+
 require_once( 'functions/menu-walkers.php' );
 
 require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme

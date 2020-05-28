@@ -1138,6 +1138,147 @@ class FAQ extends CustomPostType {
 	}
 
 /**
+ * A record item for archival display
+ */
+class Records extends CustomPostType {
+	public
+	$name           = 'record',
+	$plural_name    = 'Records',
+	$singular_name  = 'Record',
+	$add_new_item   = 'Add New Record',
+	$edit_item      = 'Edit Record',
+	$new_item       = 'New Record',
+	$public         = true,  // I dunno...leave it true
+	$use_title      = true,  // Title field
+	$use_editor     = false,  // WYSIWYG editor, post content field
+	$use_revisions  = true,  // Revisions on post content and titles
+	$use_thumbnails = false,  // Featured images
+	$use_order      = true, // Wordpress built-in order meta data
+	$use_metabox    = true, // Enable if you have custom fields to display in admin
+	$use_shortcode  = true, // Auto generate a shortcode for the post type
+		                         // (see also objectsToHTML and toHTML methods).
+	$taxonomies     = array( 'post_tag', 'org_groups' ),
+	$menu_icon      = 'dashicons-media-text',
+	$built_in       = false;
+
+	public function fields() {
+		$prefix = $this->options( 'name' ).'_';
+		return array(
+			array(
+				'name' => 'File',
+				'descr' => '',
+				'id' => $prefix.'file',
+				'type' => 'doc',
+			),
+			array(
+				'name' => 'Description',
+				'descr' => '',
+				'id' => $prefix.'description',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Date',
+				'descr' => '',
+				'id' => $prefix.'date',
+				'type' => 'date',
+			)
+		);
+	}
+
+	public function metabox() {
+		if ( $this->options( 'use_metabox' ) ) {
+			return array(
+				'id'       => 'custom_'.$this->options( 'name' ).'_metabox',
+				'title'    => __( $this->options( 'singular_name' ).' Fields' ),
+				'page'     => $this->options( 'name' ),
+				'context'  => 'after_title',
+				'priority' => 'high',
+				'fields'   => $this->fields(),
+				);
+		}
+		return null;
+	}
+
+	public function register_metaboxes() {
+		CustomPostType::register_meta_boxes_after_title();
+		parent::register_metaboxes();
+	}
+
+	public function shortcode( $attr ) {
+		$prefix = $this->options( 'name' ).'_';
+		$default_attr = array(
+			'type' => $this->options( 'name' ),
+			'header' => $this->options( 'plural_name' ).' List',
+			'css_classes' => '',
+			'collapse' => false,
+		);
+
+		if( is_array( $attr ) ) {
+			$attr = array_merge( $default_attr, $attr );
+		} else {
+			$attr = $default_attrs;
+		}
+
+		$args = array( 'classname' => __CLASS__, 'objects_only' => true );
+		$objects = parent::sc_object_list( $attr, $args );
+		$context['objects'] = $objects;
+
+		return static::render_objects_to_html( $context );
+	}
+
+	public function objectsToHTML( $objects, $css_classes ) {
+		$context['objects'] = $objects;
+		return static::render_objects_to_html( $context );
+	}
+
+	protected static function render_objects_to_html( $context ) {
+		ob_start();
+		?>
+			<table class="table table-hover">
+				<tbody>
+				<tr>
+					<th scope="column">Title</th>
+					<th scope="column">Date</th>
+					<th scope="column">Link</th>
+				</tr>
+					<?php foreach( $context['objects'] as $o ): ?>
+						<?= static::toHTML( $o ) ?>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	public static function toHTML( $post_object ) {
+		$context['record_title'] = get_the_title( $post_object );
+		$context['record_url'] = get_post_meta($post_object->ID, 'record_file', true)['url'];
+		$context['record_date'] = get_post_meta($post_object->ID, 'record_date', true);
+		return static::render_to_html( $context );
+	}
+
+	protected static function render_to_html( $context ) {
+		ob_start();
+		?>
+			<tr>
+				<td>
+					<?= $context['record_title'] ?>
+				</td>
+				<td>
+					<?= $context['record_date'] ?>
+				</td>
+				<td>
+					<a href="<?= $context['record_url'] ?>">View</a>
+				</td>
+			</tr>
+		<?php
+
+		return ob_get_clean();
+	}
+}
+
+/**
  * Register custom post types when the theme is initialized.
  * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init WP-Codex: init action hook.
  */
@@ -1149,6 +1290,7 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\Billboard',
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
+		__NAMESPACE__.'\Records',
 		__NAMESPACE__.'\Contact',
 		__NAMESPACE__.'\FAQ',
 		));
