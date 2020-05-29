@@ -1170,17 +1170,17 @@ class Records extends CustomPostType {
 				'type' => 'doc',
 			),
 			array(
-				'name' => 'Description',
-				'descr' => '',
-				'id' => $prefix.'description',
-				'type' => 'text',
-			),
-			array(
 				'name' => 'Date',
-				'descr' => '',
+				'descr' => 'YYYY-MM-DD',
 				'id' => $prefix.'date',
 				'type' => 'date',
-			)
+			),
+			array(
+				'name' => 'Description',
+				'descr' => '(Optional)',
+				'id' => $prefix.'description',
+				'type' => 'textarea',
+			),
 		);
 	}
 
