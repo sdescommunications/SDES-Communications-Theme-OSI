@@ -1148,17 +1148,17 @@ class Records extends CustomPostType {
 	$add_new_item   = 'Add New Record',
 	$edit_item      = 'Edit Record',
 	$new_item       = 'New Record',
-	$public         = true,  // I dunno...leave it true
-	$use_title      = true,  // Title field
-	$use_editor     = false,  // WYSIWYG editor, post content field
-	$use_revisions  = true,  // Revisions on post content and titles
-	$use_thumbnails = false,  // Featured images
-	$use_order      = true, // Wordpress built-in order meta data
-	$use_metabox    = true, // Enable if you have custom fields to display in admin
-	$use_shortcode  = true, // Auto generate a shortcode for the post type
-		                         // (see also objectsToHTML and toHTML methods).
+	$public         = true,
+	$use_title      = true,
+	$use_editor     = false,
+	$use_revisions  = true,
+	$use_thumbnails = false,
+	$use_order      = false,
+	$use_metabox    = true,  
+	$use_shortcode  = true,
 	$taxonomies     = array( 'post_tag', 'org_groups' ),
 	$menu_icon      = 'dashicons-media-text',
+	$default_order  = 'DESC',
 	$built_in       = false;
 
 	public function fields() {
@@ -1208,9 +1208,11 @@ class Records extends CustomPostType {
 		$prefix = $this->options( 'name' ).'_';
 		$default_attr = array(
 			'type' => $this->options( 'name' ),
-			'header' => $this->options( 'plural_name' ).' List',
-			'css_classes' => '',
-			'collapse' => false,
+			'meta_query' => array(
+				'key' => 'record_date',
+				'value' => date('YYYY-mm-dd'),
+				'compare' => '<=',
+			),
 		);
 
 		if( is_array( $attr ) ) {
@@ -1222,10 +1224,8 @@ class Records extends CustomPostType {
 		$args = array( 
 			'classname' => __CLASS__, 
 			'objects_only' => true,
-			'meta_key' => 'record_date',
-			'orderby' => 'meta_value_num',
 		);
-		
+
 		$objects = parent::sc_object_list( $attr, $args );
 		$context['objects'] = $objects;
 
