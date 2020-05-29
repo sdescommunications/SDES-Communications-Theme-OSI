@@ -1158,7 +1158,6 @@ class Records extends CustomPostType {
 	$use_shortcode  = true,
 	$taxonomies     = array( 'post_tag', 'org_groups' ),
 	$menu_icon      = 'dashicons-media-text',
-	$default_order  = 'DESC',
 	$built_in       = false;
 
 	public function fields() {
@@ -1208,17 +1207,15 @@ class Records extends CustomPostType {
 		$prefix = $this->options( 'name' ).'_';
 		$default_attr = array(
 			'type' => $this->options( 'name' ),
-			'meta_query' => array(
-				'key' => 'record_date',
-				'value' => date('YYYY-mm-dd'),
-				'compare' => '<=',
-			),
+			'order' => 'DESC',
+			'orderby' => 'meta_value',
+			'meta_key' => 'record_date',
 		);
 
 		if( is_array( $attr ) ) {
 			$attr = array_merge( $default_attr, $attr );
 		} else {
-			$attr = $default_attrs;
+			$attr = $default_attr;
 		}
 
 		$args = array( 
@@ -1241,14 +1238,20 @@ class Records extends CustomPostType {
 		ob_start();
 		?>
 			<table class="table table-hover">
+				<thead class="thead thead-inverse">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Date</th>
+						<th scope="col">Link</th>
+					</tr>
+				</thead>
 				<tbody>
-				<tr>
-					<th scope="column">Title</th>
-					<th scope="column">Date</th>
-					<th scope="column">Link</th>
-				</tr>
-					<?php foreach( $context['objects'] as $o ): ?>
-						<?= static::toHTML( $o ) ?>
+					<?php foreach( $context['objects'] as $index=>$o ): ?>
+						<tr>
+							<th scope="row"><?= $index + 1 ?></th>
+							<?= static::toHTML( $o, $index ) ?>
+						</tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
@@ -1267,17 +1270,15 @@ class Records extends CustomPostType {
 	protected static function render_to_html( $context ) {
 		ob_start();
 		?>
-			<tr>
-				<td>
-					<?= $context['record_title'] ?>
-				</td>
-				<td>
-					<?= $context['record_date'] ?>
-				</td>
-				<td>
-					<a href="<?= $context['record_url'] ?>">View</a>
-				</td>
-			</tr>
+			<td>
+				<?= $context['record_title'] ?>
+			</td>
+			<td>
+				<?= $context['record_date'] ?>
+			</td>
+			<td>
+				<a href="<?= $context['record_url'] ?>">View</a>
+			</td>
 		<?php
 
 		return ob_get_clean();
