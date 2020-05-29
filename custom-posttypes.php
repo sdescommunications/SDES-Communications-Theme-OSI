@@ -1219,7 +1219,13 @@ class Records extends CustomPostType {
 			$attr = $default_attrs;
 		}
 
-		$args = array( 'classname' => __CLASS__, 'objects_only' => true );
+		$args = array( 
+			'classname' => __CLASS__, 
+			'objects_only' => true,
+			'meta_key' => 'record_date',
+			'orderby' => 'meta_value_num',
+		);
+		
 		$objects = parent::sc_object_list( $attr, $args );
 		$context['objects'] = $objects;
 
