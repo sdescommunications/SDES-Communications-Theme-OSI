@@ -125,7 +125,7 @@ class SDES_Metaboxes {
 	 */
 	public static function save_files( $post_id, $field ) {
 		// Handle file uploads for record metabox
-		if( !empty( $_FILES['record_file']['name'] ) ) {
+		if( !empty( $_FILES['record_file']['name'] ) ) { 
 			$accepted_filetypes = array( 
 				'application/pdf', // .pdf
 				'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
@@ -137,7 +137,7 @@ class SDES_Metaboxes {
 
 			// Enforce filetype and size limitations
 			if( !in_array( $my_filetype, $accepted_filetypes ) ) {
-				wp_die( "This filetype is not supported" );
+				wp_die( "This filetype is not supported. Supported types are pdf, docx, pptx, xlsx, and csv." );
 				return;
 			}
 			if ( $_FILES['record_file']['size'] > 10485760 ) {
