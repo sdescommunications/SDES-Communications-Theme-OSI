@@ -81,11 +81,8 @@ hr {
 
 i {
   /* Might as well make this default since there are 3 classes that are dedicated to styling like this */
-  
-  /* This default introduces issues with navigation, so more classes would
-  need be defined either way */
 
-  /* color: #ffcc00; */
+  color: #ffcc00;
 }
 
 section {
