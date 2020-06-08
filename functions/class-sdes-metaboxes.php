@@ -125,40 +125,45 @@ class SDES_Metaboxes {
 	 */
 	public static function save_files( $post_id, $field ) {
 		// Handle file uploads for record metabox
-		if( !empty( $_FILES['record_file']['name'] ) ) { 
-			$accepted_filetypes = array( 
-				'application/pdf', // .pdf
-				'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
-				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .pptx
-				'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .xlsx
-				'text/csv', // .csv
-			);
-			$my_filetype = wp_check_filetype( basename ( $_FILES['record_file']['name'] ) )['type'];
+		if ( $field['type'] == 'doc' ) {
 
-			// Enforce filetype and size limitations
-			if( !in_array( $my_filetype, $accepted_filetypes ) ) {
-				wp_die( "This filetype is not supported. Supported types are pdf, docx, pptx, xlsx, and csv." );
-				return;
-			}
-			if ( $_FILES['record_file']['size'] > 10485760 ) {
-				wp_die( "This file is too large" );
-				return;
-			}
+			if( !empty( $_FILES[ $field['id'] ]['name'] ) ) { 
+				$accepted_filetypes = array( 
+					'application/pdf', // .pdf
+					'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .pptx
+					'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .xlsx
+					'text/csv', // .csv
+				);
+				$my_filetype = wp_check_filetype( basename ( $_FILES[ $field['id'] ]['name'] ) )['type'];
+	
+				// Enforce filetype and size limitations
+				if( !in_array( $my_filetype, $accepted_filetypes ) ) {
+					wp_die( "This filetype is not supported. Supported types are pdf, docx, pptx, xlsx, and csv." );
+					return;
+				}
+				if ( $_FILES[ $field['id'] ]['size'] > 10485760 ) {
+					wp_die( "This file is too large" );
+					return;
+				}
+	
+				// Upload the file to WordPress
+				$upload_info = wp_upload_bits( $_FILES[ $field['id'] ]['name'], null, file_get_contents( $_FILES[ $field['id'] ]['tmp_name'] ) );
+	
+				// Check for upload errors
+				if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
+					wp_die( 'Error during upload: ' . $upload_info['error'] );
+				} else {
+					// Delete old data
+					$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
+					wp_delete_file( $old_file );
+	
+					// Add/Update the meta field
+					update_post_meta( $post_id, $field['id'], $upload_info );
+				}
+		}
 
-			// Upload the file to WordPress
-			$upload_info = wp_upload_bits( $_FILES['record_file']['name'], null, file_get_contents( $_FILES['record_file']['tmp_name'] ) );
-
-			// Check for upload errors
-			if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
-				wp_die( 'Error during upload: ' . $upload_info['error'] );
-			} else {
-				// Delete old data
-				$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
-				wp_delete_file( $old_file );
-
-				// Add/Update the meta field
-				update_post_meta( $post_id, $field['id'], $upload_info );
-			}
+		
 		}
 	}
 
