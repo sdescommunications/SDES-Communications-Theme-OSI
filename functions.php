@@ -60,6 +60,20 @@ function post_edit_form_tag( ) {
    echo ' enctype="multipart/form-data"';
 }
 
+/**
+ * Delete files uploaded with custom metafields when the associated post is permanently deleted
+ */
+function delete_associated_files( $post_id ) {
+  $meta_box = SDES_Metaboxes::get_post_meta_box( $post_id );
+  foreach ( $meta_box['fields'] as $field ) {
+    if ( $field['type'] == 'doc' ) {
+      $file = get_post_meta( $post_id, $field['id'], true )['file'];
+      wp_delete_file( $file );
+    }
+  }
+}
+add_action( 'before_delete_post', 'delete_associated_files' );
+
 require_once( 'functions/menu-walkers.php' );
 
 require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme
