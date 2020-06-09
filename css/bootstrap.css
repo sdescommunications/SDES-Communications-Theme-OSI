@@ -6313,6 +6313,10 @@ tbody.collapse.show {
   border-radius: 0em !important;
 }
 
+.navbar-toggler i {
+  color: white !important;
+}
+
 .navbar-toggler:focus,
 .navbar-toggler:hover {
   text-decoration: none;
