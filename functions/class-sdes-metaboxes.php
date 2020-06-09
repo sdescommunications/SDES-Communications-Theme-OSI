@@ -18,6 +18,7 @@ use SDES\Metafields\SelectMetaField as SelectMetaField;
 use SDES\Metafields\MultiselectMetaField as MultiselectMetaField;
 use SDES\Metafields\RadioMetaField as RadioMetaField;
 use SDES\Metafields\CheckboxListMetaField as CheckboxListMetaField;
+use SDES\Metafields\PDFMetaField as PDFMetaField;
 use SDES\Metafields\FileMetaField as FileMetaField;
 use SDES\Metafields\EditorMetaField as EditorMetaField;
 
@@ -110,8 +111,59 @@ class SDES_Metaboxes {
 		}
 		if ( $meta_box ) {
 			foreach ( $meta_box['fields'] as $field ) {
-				static::save_default( $post_id, $field );
+				if ( $field['type'] === 'doc' ) {
+					static::save_files( $post_id, $field );
+				} else {
+					static::save_default( $post_id, $field );
+				}
 			}
+		}
+	}
+
+	/**
+	 * Upload file data to WordPress
+	 */
+	public static function save_files( $post_id, $field ) {
+		// Handle file uploads for record metabox
+		if ( $field['type'] == 'doc' ) {
+
+			if( !empty( $_FILES[ $field['id'] ]['name'] ) ) { 
+				$accepted_filetypes = array( 
+					'application/pdf', // .pdf
+					'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .pptx
+					'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .xlsx
+					'text/csv', // .csv
+				);
+				$my_filetype = wp_check_filetype( basename ( $_FILES[ $field['id'] ]['name'] ) )['type'];
+	
+				// Enforce filetype and size limitations
+				if( !in_array( $my_filetype, $accepted_filetypes ) ) {
+					wp_die( "This filetype is not supported. Supported types are pdf, docx, pptx, xlsx, and csv." );
+					return;
+				}
+				if ( $_FILES[ $field['id'] ]['size'] > 10485760 ) {
+					wp_die( "This file is too large" );
+					return;
+				}
+	
+				// Upload the file to WordPress
+				$upload_info = wp_upload_bits( $_FILES[ $field['id'] ]['name'], null, file_get_contents( $_FILES[ $field['id'] ]['tmp_name'] ) );
+	
+				// Check for upload errors
+				if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
+					wp_die( 'Error during upload: ' . $upload_info['error'] );
+				} else {
+					// Delete old data
+					$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
+					wp_delete_file( $old_file );
+	
+					// Add/Update the meta field
+					update_post_meta( $post_id, $field['id'], $upload_info );
+				}
+		}
+
+		
 		}
 	}
 
@@ -121,8 +173,8 @@ class SDES_Metaboxes {
 		if ( $new !== '' and $new !== null and $new != $old ) {
 			// Update if new is not empty and is not the same value as old.
 			update_post_meta( $post_id, $field['id'], $new );
-		} elseif ( ( $new === '' or is_null( $new ) ) and $old ) {
-			// Delete if we're sending a new null value and there was an old value.
+		} elseif ( ( ( $new === '' or is_null( $new ) ) and $old ) and $field['type'] !== 'doc') {
+			// Delete the old value if a null is sent and the field is not a file upload 
 			delete_post_meta( $post_id, $field['id'], $old );
 		}
 		// Otherwise we do nothing, field stays the same.
@@ -191,6 +243,9 @@ class SDES_Metaboxes {
 			case 'checkbox':
 			case 'checkbox_list':
 			$field_obj = new CheckboxListMetaField( $field );
+			break;
+			case 'doc':
+			$field_obj = new PDFMetaField( $field );
 			break;
 			case 'file':
 			$field['post_id'] = $post_id;

@@ -902,7 +902,7 @@ class sc_backButton extends ShortCodeBase {
 	$wysiwyg = true,
 	$params = array();
 
-	public static function callback() {
+	public static function callback( $attrs, $content='' ) {
 		$post = get_post();
 
 		if($post->post_parent != 0) {

@@ -49,6 +49,31 @@ function enqueue_scripts_and_styles(){
   wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 }
 
+/**
+ * Enable file uploads in custom metafields
+ * 
+ * @see https://developer.wordpress.org/reference/hooks/post_edit_form_tag/
+ * @see https://code.tutsplus.com/articles/attaching-files-to-your-posts-using-wordpress-custom-meta-boxes-part-1--wp-22291
+ */
+add_action( 'post_edit_form_tag' , 'post_edit_form_tag' );
+function post_edit_form_tag( ) {
+   echo ' enctype="multipart/form-data"';
+}
+
+/**
+ * Delete files uploaded with custom metafields when the associated post is permanently deleted
+ */
+function delete_associated_files( $post_id ) {
+  $meta_box = SDES_Metaboxes::get_post_meta_box( $post_id );
+  foreach ( $meta_box['fields'] as $field ) {
+    if ( $field['type'] == 'doc' ) {
+      $file = get_post_meta( $post_id, $field['id'], true )['file'];
+      wp_delete_file( $file );
+    }
+  }
+}
+add_action( 'before_delete_post', 'delete_associated_files' );
+
 require_once( 'functions/menu-walkers.php' );
 
 require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme

@@ -656,9 +656,10 @@ abstract class CustomPostType {
 			'orderby'        => $params['orderby'],
 			'order'          => $params['order'],
 			'offset'         => $params['offset'],
+			'meta_key'       => $params['meta_key'],
 			'meta_query'     => $params['meta_query'],
 			);
-
+			
 		$query = new \WP_Query( $query_array );
 
 		global $post;
