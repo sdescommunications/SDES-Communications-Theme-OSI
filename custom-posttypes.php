@@ -1156,7 +1156,7 @@ class Records extends CustomPostType {
 	$use_order      = false,
 	$use_metabox    = true,  
 	$use_shortcode  = true,
-	$taxonomies     = array( 'post_tag', 'org_groups' ),
+	$taxonomies     = array( 'arc_groups' ),
 	$menu_icon      = 'dashicons-media-text',
 	$built_in       = false;
 
