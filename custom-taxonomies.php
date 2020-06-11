@@ -32,10 +32,33 @@ class OrganizationalGroups extends CustomTaxonomy
 	$hierarchical       = True;
 } // END class 
 
+/**
+ * Describes archival storage groups for Records
+ */
+class ArchivalGroups extends CustomTaxonomy
+{
+	public
+	$name               = 'arc_groups',
+	$general_name       = 'Archival Groups',
+	$singular_name      = 'Archival Group',
+	$search_items       = 'Search Archival Groups',
+	$popular_items      = 'Popular Archival Groups',
+	$all_times          = 'All Archival Groups',
+	$parent_item        = 'Parent Archival Group',
+	$parent_item_colon  = 'Parent Archival Group:',
+	$edit_item          = 'Edit Archival Group',
+	$update_item        = 'Update Archival Group',
+	$add_new_item       = 'Add New Archival Group',
+	$new_item_name      = 'New Tag Archival Group',
+	
+	$show_admin_column  = True,
+	$hierarchical       = True;
+}
 
 function register_custom_taxonomies() {
 	CustomTaxonomy::Register_Taxonomies( array(
 		__NAMESPACE__.'\OrganizationalGroups',
+		__NAMESPACE__.'\ArchivalGroups',
 		));
 }
 add_action('init', __NAMESPACE__.'\register_custom_taxonomies');
