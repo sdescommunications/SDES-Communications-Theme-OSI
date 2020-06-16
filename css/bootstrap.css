@@ -5565,6 +5565,7 @@ tbody.collapse.show {
 .dropup .dropdown-toggle::after {
   border-top: 0;
   border-bottom: 0.3em solid;
+
 }
 
 .dropdown-menu {
@@ -6291,6 +6292,14 @@ tbody.collapse.show {
   margin-bottom: 0;
   list-style: none;
 }
+/* Styles dropdown-menu icons */
+.navbar-nav li::after{
+  
+  vertical-align: bottom;
+  float: right;
+   color:white
+ }
+ 
 
 .navbar-nav .nav-link {
   padding-right: 0;
