@@ -31,6 +31,7 @@ class Nav_Menu extends Walker_Nav_Menu {
             $output .= "\n" . $indent . '<div class="dropdown-menu megamenu"><div class="container"><ul class="row ' . $class_names . ' ">' . "\n";        
         }else{
             $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
+            
         }
         
     }
@@ -54,7 +55,8 @@ class Nav_Menu extends Walker_Nav_Menu {
         
         // Depth-dependent classes.
         $depth_classes = array(
-            ( $depth == 0 ? 'nav-item dropdown menu-large' : null ),
+            //add dropdown toggle icon for top navbar menu items
+            ( $depth == 0 ? 'nav-item dropdown menu-large dropdown-toggle' : null ),
             ( $depth == 1 ? 'dropdown-header col-md-3' : null),
             //( $depth >=2 ? 'sub-sub-menu-item' : '' ),
             //( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
@@ -75,7 +77,7 @@ class Nav_Menu extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-        $attributes .= ' class="' . ( $depth == 1 ? 'header-link' : 'nav-link ' ) . '"';
+        $attributes .= ' class="' . ( $depth == 1 ? 'header-link' : 'nav-link ' ) . '" ';
  
         // Build HTML output and pass through the proper filter.
         $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s%6$s</a>%7$s',
