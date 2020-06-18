@@ -155,15 +155,18 @@ class SDES_Metaboxes {
 					wp_die( 'Error during upload: ' . $upload_info['error'] );
 				} else {
 					// Delete old data
-					$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
-					wp_delete_file( $old_file );
+					if ( !empty( get_post_meta( $post_id, $field['id'], true )['file'] ) ) {
+						$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
+						wp_delete_file( $old_file );
+					}
 	
 					// Add/Update the meta field
 					update_post_meta( $post_id, $field['id'], $upload_info );
-				}
-		}
 
-		
+					// Default post title to uploaded file title
+					static::set_default_title( $post_id, $field );
+				}
+			}
 		}
 	}
 
@@ -179,6 +182,41 @@ class SDES_Metaboxes {
 		}
 		// Otherwise we do nothing, field stays the same.
 		return;
+	}
+
+	/**
+	 * Use file attachments as default titles for new posts
+	 */
+	public static function set_default_title( $post_id, $field ) {
+		if ( empty( get_the_title( $post_id ) ) ) {
+			$file_url = get_post_meta( $post_id, $field['id'], true)['url'];
+			$filename = pathinfo( $file_url, PATHINFO_FILENAME );
+
+			/**
+			 * Remove auto "-1" suffix as of WP 5.3.1 and cleanup string
+			 * @see: https://core.trac.wordpress.org/ticket/42437
+			 */
+			$filename = preg_replace( '/-\d*$/', '', $filename );
+			$filename = str_replace( '-', ' ', $filename );
+
+			// Define new post data
+			$new_post_data = array(
+				'ID' => $post_id,
+				'post_title' => $filename,
+			);
+
+			/**
+			 * Unhooking save action prevents an infinite loop calling wp_update_post inside save_post
+			 * @see: https://developer.wordpress.org/reference/hooks/save_post/
+			 */
+			remove_action( 'save_post', __CLASS__ . '::save_meta_data' );
+
+			// Update title
+			wp_update_post( $new_post_data );
+			
+			// Rehook
+			add_action( 'save_post', __CLASS__ . '::save_meta_data' );
+		}
 	}
 
 	/**
