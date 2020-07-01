@@ -6295,7 +6295,7 @@ tbody.collapse.show {
 }
 /* Styles dropdown-menu icons */
 .navbar-nav li::after{
-  
+  visibility: hidden;
   vertical-align: bottom;
   float: right;
    color:white
@@ -6353,6 +6353,8 @@ tbody.collapse.show {
 }
 
 @media (max-width: 575px) {
+  
+ 
   .navbar-toggleable .navbar-nav .dropdown-menu {
     position: static;
     float: none;
@@ -6397,6 +6399,13 @@ tbody.collapse.show {
 }
 
 @media (max-width: 767px) {
+  /* Styles dropdown-menu icons */
+  .navbar-nav li::after{
+    visibility: visible;
+    vertical-align: bottom;
+    float: right;
+      color:white !important;
+    }
   .navbar-toggleable-sm .navbar-nav .dropdown-menu {
     position: static;
     float: none;
