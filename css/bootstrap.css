@@ -1387,6 +1387,7 @@ footer .site-title {
 footer .event {
   background: black;
   margin-top: 25px;
+  word-wrap: break-word;
 }
 
 footer .event .date {
