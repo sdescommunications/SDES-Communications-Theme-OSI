@@ -154,9 +154,6 @@ class SDES_Metaboxes {
 				if( ( isset( $upload_info['error'] ) ) and $upload_info['error'] != 0 ) {
 					wp_die( 'Error during upload: ' . $upload_info['error'] );
 				} else {
-					// Update the saved filepath
-					$upload_info['url'] = wp_make_link_relative( $upload_info['url'] );
-
 					// Delete old data
 					if ( !empty( get_post_meta( $post_id, $field['id'], true )['file'] ) ) {
 						$old_file = get_post_meta( $post_id, $field['id'], true )['file'];
@@ -165,9 +162,6 @@ class SDES_Metaboxes {
 	
 					// Add/Update the meta field
 					update_post_meta( $post_id, $field['id'], $upload_info );
-
-					error_log( 'SAVED URL: ' . get_post_meta( $post_id, $field['id'], true )['url'] );
-
 					// Default post title to uploaded file title
 					static::set_default_title( $post_id, $field );
 				}
