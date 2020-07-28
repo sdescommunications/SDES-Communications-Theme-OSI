@@ -74,6 +74,38 @@ function delete_associated_files( $post_id ) {
 }
 add_action( 'before_delete_post', 'delete_associated_files' );
 
+/**
+ * Hotfix to update Record links to new site
+ */
+function update_urls() {
+  $site_url = get_site_url();
+
+  // Get all Record posts
+  $args = array(
+    'post_type' => 'Record'
+  );
+  $query = new WP_Query($args);
+
+  // Iterate over Records and update URLs
+  if ( $query->have_posts() ) {
+    while ( $query->have_posts() ) {
+      $query->the_post();
+      $post_id = get_the_ID();
+
+      $post_meta = get_post_meta( $post_id, 'record_file', true);
+      $old_url = $post_meta['url'];
+
+      $haystack = strstr( $old_url, '/wp-content' );
+
+      $new_url = $site_url . $haystack;
+      $post_meta['url'] = $new_url;
+
+      update_post_meta( $post_id, 'record_file', $post_meta);
+    }
+  }
+}
+add_action( 'admin_init', 'update_urls' );
+
 require_once( 'functions/menu-walkers.php' );
 
 require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme

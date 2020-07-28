@@ -162,7 +162,6 @@ class SDES_Metaboxes {
 	
 					// Add/Update the meta field
 					update_post_meta( $post_id, $field['id'], $upload_info );
-
 					// Default post title to uploaded file title
 					static::set_default_title( $post_id, $field );
 				}
