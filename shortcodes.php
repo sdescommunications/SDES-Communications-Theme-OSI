@@ -285,10 +285,7 @@ class sc_events extends ShortcodeBase {
 	</div>
 	<div class="col-sm-8 description">
 		<h3 class="event-title">
-			<a href="<?= $context['link'] ?>">
-				<?= $title ?>
-
-			</a>
+			<a href="<?= $context['link'] ?>"><?= $title ?></a>
 		</h3>
 		<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>
 	</div>
