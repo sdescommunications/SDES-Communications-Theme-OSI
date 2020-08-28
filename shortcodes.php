@@ -268,7 +268,7 @@ class sc_events extends ShortcodeBase {
 					for ( $i = 0; $i < $count; $i++ ) {
 							// Prepare xml output to html.
 						$title = htmlentities( $xml->channel->item[ $i ]->title );
-						$title = ( strlen( $title ) > 25) ? substr( $title, 0, 19 ) : $title;
+						$title = ( strlen( $title ) > 50) ? substr( $title, 0, 35 ) . ' ...' : $title;
 						$loc = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->name );
 						$map = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->mapurl );
 						$startTime = new \DateTime( $xml->channel->item[ $i ]->children( 'ucfevent', true )->startdate, new \DateTimeZone( $attr['timezone'] ) );
@@ -285,10 +285,7 @@ class sc_events extends ShortcodeBase {
 	</div>
 	<div class="col-sm-8 description">
 		<h3 class="event-title">
-			<a href="<?= $context['link'] ?>">
-				<?= $title ?>
-
-			</a>
+			<a href="<?= $context['link'] ?>"><?= $title ?></a>
 		</h3>
 		<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>
 	</div>
