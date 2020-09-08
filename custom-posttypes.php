@@ -522,6 +522,14 @@ class Staff extends CustomPostType {
 			$prefix = $this->options( 'name' ).'_';
 			return array(
 				array(
+					'name' => 'Pronouns',
+					'descr' => nl2br(' Please leave blank if they haven\'t specified their pronouns.
+
+					Ex: she/her/hers, he/him/his, they/them/theirs, etc'),
+					'id' => $prefix.'pronouns',
+					'type' => 'text',
+					),
+				array(
 					'name' => 'Position Title',
 					'descr' => '',
 					'id' => $prefix.'position_title',
@@ -630,6 +638,7 @@ class Staff extends CustomPostType {
 		? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-fluid' ) )
 		: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
 		$context['title'] = get_the_title( $post_object );
+		$context['staff_pronouns'] = get_post_meta( $post_object->ID, 'staff_pronouns', true );
 		$context['staff_position_title'] = get_post_meta( $post_object->ID, 'staff_position_title', true );
 		$context['staff_phone'] = get_post_meta( $post_object->ID, 'staff_phone', true );
 		$context['staff_email'] = get_post_meta( $post_object->ID, 'staff_email', true );
@@ -643,13 +652,16 @@ class Staff extends CustomPostType {
 		<div class="staff">
 			<?= $context['thumbnail'] ?>
 			<div class="staff-content">
-				<h3 class="staff-name">
-					<?php if (!empty($context['content'])) { ?>
-						<a href="<?= get_permalink($context['Post_ID']) ?>"><?= $context['title'] ?></a>
-					<?php } else { ?>
-						<?= $context['title'] ?>
-					<?php } ?>
-				</h3>
+				<div class="staff-name-and-pronouns">
+					<h3 class="staff-name">
+						<?php if (!empty($context['content'])) { ?>
+							<a href="<?= get_permalink($context['Post_ID']) ?>"><?= $context['title'] ?></a>
+						<?php } else { ?>
+							<?= $context['title'] ?>
+						<?php } ?>
+					</h3>
+					<h3 class="staff-pronouns ml-2"><?= $context['staff_pronouns'] ?></h3>
+				</div>
 				<h4 class="staff-title"><?= $context['staff_position_title'] ?></h4>
 				<h5 class="staff-phone"><?= $context['staff_phone'] ?></h5>
 				<h5 class="staff-email">
