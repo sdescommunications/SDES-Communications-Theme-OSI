@@ -7,6 +7,7 @@
 		$image_url = $image_url[0];
 	}
 
+	$pronouns   = get_post_meta( $post->ID, 'staff_pronouns', true);
 	$position	= get_post_meta( $post->ID, 'staff_position_title', true);
 	$phone 		= get_post_meta( $post->ID, 'staff_phone', true );
 	$email 		= get_post_meta( $post->ID, 'staff_email', true );
@@ -17,11 +18,10 @@
 
 <div class="container">
 	<br>
-	<h1>
-		<?=
-			get_the_title();
-		?>
-	</h1>
+	<div class="staff-name-and-pronouns">
+		<h1 class="staff-title mr-2"><?= get_the_title(); ?></h1>
+		<h1 class="staff-pronouns"><?= $pronouns ?></h1>
+	</div>
 	<hr>
 	<section>
 		<article class="full-width">

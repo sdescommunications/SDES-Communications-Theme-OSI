@@ -1162,6 +1162,12 @@ header .header-break img {
   border-bottom: 1px solid black;
 }
 
+.staff-pronouns{
+  color: #a7abad;
+  font-style: italic;
+  display: inline-block;
+}
+
 .staff-role h1,
 .staff-role h2,
 .staff-role h3,
@@ -1210,12 +1216,21 @@ header .header-break img {
 }
 
 .staff .staff-name {
+  margin-right:0.5rem;
+}
+
+.staff .staff-name,
+.staff .staff-pronouns {
   font-size: 2em;
 }
 
-.staff .staff-title {
-  font-size: 1.75em;
+.staff-name-and-pronouns {
+  display: flex;
 }
+
+.staff .staff-title  {
+  font-size: 1.75em;
+} 
 
 .staff .staff-email,
 .staff .staff-phone {
