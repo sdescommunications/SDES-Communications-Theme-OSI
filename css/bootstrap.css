@@ -4,7 +4,7 @@
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@font-face {
+ @font-face {
   font-family: 'gotham_lightregular';
   src: url("//assets.sdes.ucf.edu/fonts/gotham/light-webfont.woff") format("woff");
 }
@@ -1163,9 +1163,8 @@ header .header-break img {
 }
 
 .staff-pronouns{
-  color: #a7abad;
+  color: #636c72;
   font-style: italic;
-  display: inline-block;
 }
 
 .staff-role h1,
@@ -1213,10 +1212,6 @@ header .header-break img {
   .staff .staff-content {
     margin: 0;
   }
-}
-
-.staff .staff-name {
-  margin-right:0.5rem;
 }
 
 .staff .staff-name,
