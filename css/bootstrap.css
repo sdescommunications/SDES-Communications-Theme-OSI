@@ -874,6 +874,7 @@ header .header-break img {
   border: 2px solid black;
   padding: 0;
   width: 100% !important;
+  min-width: 8rem;
   font-family: "gotham_boldregular", Arial, sans-serif !important;
   text-align: center;
   margin-left: 15px;
