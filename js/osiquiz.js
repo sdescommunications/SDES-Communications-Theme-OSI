@@ -61,7 +61,7 @@ const ORGINFO = [
     name: 'Rosen Life',
     info:
       'Rosen Life serves students at the Rosen College Campus hosting events, programming, and services. These include Rosen’s Get Your Grill On, Rosen’s Got Talent, Mr. & Ms. Hospitality, Relaxation Week and many more.',
-    link: 'https://osi.ucf.edu/agencies/rosne-life',
+    link: 'https://osi.ucf.edu/agencies/rosen-life',
   },
 
   {
