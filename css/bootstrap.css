@@ -8238,6 +8238,112 @@ button.close {
   text-align: center;
 }
 
+/* animation styles */
+/* hover effect: hover image or button to zoom in */
+.hover-zoom-group {
+    position: relative;
+    box-shadow: 0 0 8px #000;
+    transition: all 2s;
+    padding-top: 15px;
+    margin: auto;
+  }
+  
+  .hover-zoom-group img {
+    vertical-align: middle;
+    transition: all 1s;
+    width: 140px;
+    height: 140px;
+  }
+  
+  .hover-zoom-group:hover,
+  .hover-zoom-btn:hover img {
+    box-shadow: 0 0 10px #000;
+  }
+  
+  .hover-zoom-group:hover img, 
+  .hover-zoom-btn:hover img{
+    transform: scale(1.1);
+  }
+  
+  
+  /* hover effect: hover image to reveal title, description, and link */
+  .hover-group {
+    position: relative;
+    margin: 10px 20px;
+    min-width: 250px;
+    max-width: 300px;
+    min-height: 300px;
+    width: 100%;
+    color: black;
+    text-align: left;
+    background-color: white;
+    display: block;
+  }
+  .hover-group * {
+    box-sizing: border-box;
+    transition: all .5s;
+  }
+  
+  .wide-hover-group {
+    margin-right: 40px;
+  }
+  
+  .hover-group img {
+    position: absolute;
+    right: 0;
+    right: 0;
+    opacity: 1;
+    height: auto;
+    width: 100%;
+    background-color:white;
+  
+    translate: translate(0%, -70%);
+  }
+  
+  .hover-body {
+    position: absolute;
+    width: 170px;
+    height: 195px;
+    top: 50%;
+    left: 0;
+    padding: 10px;
+    padding-right: 0;
+  
+    transform: translateY(-50%);
+  }
+  
+  .hover-text {
+    margin: 0;
+    width: 100%;
+  
+    transform: translateX(20px);
+  }
+  
+  .hover-group a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  
+  .hover-group:hover img {
+    width: 150px;
+    top: 30%;
+    right: -10%;
+    border-radius: 150px; 
+  }
+  .wide-hover-group:hover img {
+    right: -18%;
+  }
+  
+  .hover-group:hover hover-body {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+
 .align-baseline {
   vertical-align: baseline !important;
 }
