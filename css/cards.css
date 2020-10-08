@@ -325,15 +325,15 @@
 
 /* Style the video on billboard video template */
 #myVideo {
-  width: 100%;
+	width: 100%;
 	position: relative; 
 	top: 50%;
-  transform: translateY(-50%); 
+	transform: translateY(-50%); 
 }
 
 #video-wrapper{
   overflow: hidden;
-  height: 100%;
+  height: 280px;
 } 
 @media (max-width: 991px){
 	#myvideo{
