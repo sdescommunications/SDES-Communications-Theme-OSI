@@ -8290,14 +8290,12 @@ button.close {
   
   .hover-group img {
     position: absolute;
-    right: 0;
+    top: 0;
     right: 0;
     opacity: 1;
     height: auto;
     width: 100%;
-    background-color:white;
-  
-    translate: translate(0%, -70%);
+    background-color: white;
   }
   
   .hover-body {
