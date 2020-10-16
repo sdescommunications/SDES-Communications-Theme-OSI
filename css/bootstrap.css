@@ -8238,6 +8238,15 @@ button.close {
   text-align: center;
 }
 
+/* mobile interactions */
+/* do not display for large screens */
+@media (min-width: 576px) {
+  .mobile-view {
+    display: none;
+  }
+}
+
+
 /* animation styles */
 /* hover effect: hover image or button to zoom in */
 .hover-zoom-group {
