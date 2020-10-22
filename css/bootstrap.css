@@ -8262,6 +8262,12 @@ button.close {
   }
 }
 
+/* do not display for small screens */
+@media (max-width: 576px) {
+  .web-view {
+    display: none;
+  }
+}
 
 /* animation styles */
 /* hover effect: hover image or button to zoom in */
@@ -8273,26 +8279,25 @@ button.close {
     margin: auto;
   }
   
-  .hover-zoom-group img {
+.hover-zoom-group img {
     vertical-align: middle;
     transition: all 1s;
     width: 140px;
     height: 140px;
-  }
+}
   
-  .hover-zoom-group:hover,
-  .hover-zoom-btn:hover img {
+.hover-zoom-group:hover,
+.hover-zoom-btn:hover img {
     box-shadow: 0 0 10px #000;
-  }
+}
   
-  .hover-zoom-group:hover img, 
-  .hover-zoom-btn:hover img{
+.hover-zoom-group:hover img, 
+.hover-zoom-btn:hover img{
     transform: scale(1.1);
-  }
+}
   
-  
-  /* hover effect: hover image to reveal title, description, and link */
-  .hover-group {
+/* hover effect: hover image to reveal title, description, and link */
+.hover-group {
     position: relative;
     margin: 10px 20px;
     min-width: 250px;
@@ -8303,17 +8308,17 @@ button.close {
     text-align: left;
     background-color: white;
     display: block;
-  }
-  .hover-group * {
+}
+.hover-group * {
     box-sizing: border-box;
     transition: all .5s;
-  }
+}
   
-  .wide-hover-group {
+.wide-hover-group {
     margin-right: 40px;
-  }
+}
   
-  .hover-group img {
+.hover-group img {
     position: absolute;
     top: 0;
     right: 0;
@@ -8321,9 +8326,9 @@ button.close {
     height: auto;
     width: 100%;
     background-color: white;
-  }
+}
   
-  .hover-body {
+.hover-body {
     position: absolute;
     width: 170px;
     height: 195px;
@@ -8333,38 +8338,38 @@ button.close {
     padding-right: 0;
   
     transform: translateY(-50%);
-  }
+}
   
-  .hover-text {
+.hover-text {
     margin: 0;
     width: 100%;
   
     transform: translateX(20px);
-  }
+}
   
-  .hover-group a {
+.hover-group a {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 1;
-  }
+}
   
-  .hover-group:hover img {
+.hover-group:hover img {
     width: 150px;
     top: 30%;
     right: -10%;
     border-radius: 150px; 
-  }
-  .wide-hover-group:hover img {
+}
+.wide-hover-group:hover img {
     right: -18%;
-  }
+}
   
-  .hover-group:hover hover-body {
+.hover-group:hover hover-body {
     transform: translateX(0px);
     opacity: 1;
-  }
+}
 
 
 .align-baseline {
