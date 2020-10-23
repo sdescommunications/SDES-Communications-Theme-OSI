@@ -6199,6 +6199,10 @@ tbody.collapse.show {
   padding: 0.5em 1em;
 }
 
+.nav-link:hover {
+  background-color: #ddd;
+}
+
 .nav-link:focus,
 .nav-link:hover {
   text-decoration: none;
@@ -6248,14 +6252,14 @@ tbody.collapse.show {
 }
 
 .nav-pills .nav-link {
-  border-radius: 0.25rem;
+  font-weight: bold;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .nav-item.show .nav-link {
-  color: #fff;
+  color: #000;
   cursor: default;
-  background-color: #0275d8;
+  background-color: #ffc904;
 }
 
 .nav-fill .nav-item {
