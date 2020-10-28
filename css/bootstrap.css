@@ -6199,13 +6199,10 @@ tbody.collapse.show {
   padding: 0.5em 1em;
 }
 
-.nav-link:hover {
-  background-color: #ddd;
-}
-
 .nav-link:focus,
 .nav-link:hover {
   text-decoration: none;
+  background-color: #ddd;
 }
 
 .nav-link.disabled {
