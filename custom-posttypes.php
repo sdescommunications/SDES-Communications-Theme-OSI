@@ -1121,7 +1121,14 @@ class FAQ extends CustomPostType {
 		public static function toHTML( $post_object ) {
 			$context['Post_ID'] = $post_object->ID;
 			$context['title'] = get_the_title( $post_object );
-			$context['content'] = wpautop($post_object->post_content);
+			$context['content'] = do_shortcode(
+				/**
+				 * The [embed] shortcode is not enabled until 'the_content' filter has been
+				 * processed at least once, so we need a little extra processing on the post
+				 * @see https://codex.wordpress.org/Embed_Shortcode
+				 */
+				$GLOBALS['wp_embed']->run_shortcode( wpautop( $post_object->post_content ) )
+			);
 			return static::render_to_html( $context );
 		}
 
