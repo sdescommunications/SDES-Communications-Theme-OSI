@@ -1532,6 +1532,7 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\Page',
 		__NAMESPACE__.'\Alert',
 		__NAMESPACE__.'\Billboard',
+		__NAMESPACE__ . '\Events',
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
 		__NAMESPACE__.'\Records',
