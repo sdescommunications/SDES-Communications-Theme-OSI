@@ -1108,6 +1108,23 @@ header .header-break img {
   width: 50px;
 }
 
+.event-content p {
+  color: #636c72 !important;
+  margin-bottom: 0;
+}
+
+.event-content {
+  max-width: 330px;
+}
+
+.event-title {
+  margin-top: 20px;
+}
+
+.events-header {
+  margin-bottom: 20px;
+}
+
 .faq:after {
   content: '';
   display: block;
