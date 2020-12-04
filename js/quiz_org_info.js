@@ -51,7 +51,7 @@ const orgInfo = [
             ['a', 'b', 'c', 'd', 'e'],
             ['b', 'e'],
             ['c', 'e'],
-            ['a', 'f'],
+            ['e', 'd', 'f'],
         ],
     },
 
@@ -81,7 +81,7 @@ const orgInfo = [
             ['a', 'b', 'c', 'd', 'e'],
             ['a', 'b', 'f'],
             ['a', 'b'],
-            ['b', 'f'],
+            ['b', 'e', 'f'],
         ],
     },
 
@@ -110,6 +110,78 @@ const orgInfo = [
             ['c', 'f'],
         ],
     },
+
+    {
+        name: 'Arc Jacksonville',
+        info: "The Arc Jacksonville’s AmeriCorps Youth Transaction Project (The Project) was structured to address the growing need to assist young adults with intellectual and developmental disabilities in their quest for independence while they attended school at the University of North Florida. The Project has since its beginning expanded to five Arc Jacksonville sites and engages 30+ Corps members in service annually to more than 200 individuals served. Members of The Arc Jacksonville's AmeriCorps Youth Transaction Project (The Project) provide a year of service as mentors, helping individuals with intellectual disabilities learn and perfect much needed independent living skills in a creative environment. Members hold one-on-one or small group mentoring sessions, focusing on financial literacy, wellness, and professionalism. Members also come together for service projects to benefit partnering agencies in the Jacksonville community.",
+        website: 'https://arcjacksonville.org/americorps/',
+        scores: [
+            ['a', 'c'],
+            ['b', 'f'],
+            ['c'],
+            ['a', 'f'],
+        ]
+    },
+
+    {
+        name: 'Girl Scout of West Central Orlando',
+        info: 'The Girl Scouts of West Central Florida, Inc. (GSWCF) provides a safe, girl-only space where girls K-12 can develop their leadership skills through age-appropriate activities enabling them to discover their values and the world around them; connect with others in a multicultural environment; and take action to make a difference in their communities. Generously funded by United Way of Central Florida, this program serves 1,820 Polk county girls during school, after school, and in the summer providing Girl Scout experiences.  Program Specialists commit to serving 1,700 service hours providing mentorship, academic support, leadership development, among other duties and activities to girls and being the role models they need. Corps members earn a monthly living stipend ($1,189 gross) and are eligible to receive the $6195 Segal Americorps Education Award.',
+        website: 'https://www.gswcf.org/en/about-girl-scouts/our-program.html',
+        scores: [
+            ['a'],
+            ['e'],
+            ['c'],
+            ['e', 'f'],
+        ]
+    },
+
+    {
+        name: 'Metropolitan Ministries',
+        info: "Metropolitan Ministries is a local, grassroots, donor and volunteer-fueled community nonprofit that provides services designed to help homeless and at-risk children and families throughout Tampa Bay. We have an AmeriCorps State program and an AmeriCorps VISTA program with about 30 total members. Through both programs our goal is to provide resources and services that help people improve health and access safe shelter or permanent housing; as well as to generate resources that expand our housing and supportive services for families experiencing poverty and homelessness. We are always looking for awesome AmeriCorps members to join our Metro Family! Metropolitan Ministries' AmeriCorps State program, Brigaide, and AmeriCorps VISTA program, Tampa Bay Homeless Outreach, may be a good fit for you. Brigaide provides concrete goods like food and clothing, system navigation services, and connection to housing, health, employment, and transportation resources to individuals experiencing homelessness in Hillsborough and Pasco Counties. The Americorps VISTA program, engages members in a variety of capacity building and sustainability activities, including: volunteer recruitment and management, program and partnership development, digital marketing, grant writing, and social enterprise development.",
+        website: 'https://www.metromin.org/americorps/',
+        scores: [
+            ['c'],
+            ['a'],
+            ['b', 'd'],
+            ['e'],
+        ]
+    },
+
+    {
+        name: 'Florida Conservation Corps (FLCC): Project A.N.T.',
+        info: 'The Florida Conservation Corps (FLCC) AmeriCorps Program is administered by the Florida Department of Environmental Protection (DEP). Members serve 1700 hours in Florida State Parks. FLCC members will serve under one of three Project areas, Project A.N.T. (AmeriCorps Nonnative plant Terminators), Project T.R.E.C. (Trail Restoration and Enhancement Corps), or Project R.O.A.R (Regional Outreach and Awareness Recruiters). Members are required to work 35 – 40 hours per week and must have a positive attitude. Project A.N.T. focuses on habitat restoration by managing invasive exotic plants. Members reduce invasive exotic plant infestations through various land management techniques (herbicide use/manual removal), recruit volunteers, & educate park visitors about issues of invasive exotic plants in natural ecosystems.',
+        website: 'https://www.floridastateparks.org/FLCC',
+        scores: [
+            ['b'],
+            ['a'],
+            ['a'],
+            ['b'],
+        ]
+    },
+
+    {
+        name: 'Jumpstart',
+        info: 'Jumpstart is a national early education organization that recruits and trains college students and community volunteers to work with preschool children in low-income neighborhoods. Through a proven curriculum, these children develop the language and literacy skills they need to be ready for school, setting them on a path to close the achievement gap before it is too late. Join us to work toward the day every child in America enters kindergarten prepared to succeed. Corps members must be at least 17 years old with High School Diploma or equivalent and commit to approximately 8-12 hours a week Monday-Friday. Students who participate can make an impact on educational equity while potentially earning funds to help pay for their college education through Federal Work Study or a Segal AmeriCorps Education Award (depending on where they serve).',
+        website: 'https://www.jstart.org/our-work/corps-members/#positions',
+        scores: [
+            ['a'],
+            ['b', 'c'],
+            ['c'],
+            ['a'],
+        ]
+    },
+
+    {
+        name: 'AMIkids',
+        info: 'AMI Kids AmeriCorps members provide mentoring services in the areas of education and job skills training to youth currently involved with, or at risk of being involved with the Department of Juvenile Justice. Members will be mentoring youth one on one and group, hosting monthly job clubs, tutoring, recruiting volunteers to come speak to youth, and supporting follow-up efforts with youth exiting the program. All members will be required to attend regional training in or near service area with Career Coordinators to receive pre-service orientation to the AmeriCorps program. AmeriCorps members commit to serve a minimum 675 hours of mentor service and earn a Living Allowance of $480 per month. Contact Adalyn Hazelman Jaquez (Orlando-CC2@amikids.org) for more info.',
+        website: 'https://www.jstart.org/our-work/corps-members/#positions',
+        scores: [
+            ['c'],
+            ['c', 'e', 'f'],
+            ['c'],
+            ['a', 'f']
+        ]
+    }
 ];
 
 export default orgInfo;
