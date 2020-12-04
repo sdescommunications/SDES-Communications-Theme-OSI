@@ -472,6 +472,224 @@ class Billboard extends CustomPostType {
 	}
 }
 
+
+/*
+* OSI Event 
+*/
+class Events extends CustomPostType
+{
+	public
+		$name 			= 'event',
+		$plural_name	= 'Events',
+		$singular_name	= 'Event',
+		$add_new_item	= 'Add New Event',
+		$edit_item 		= 'Edit Event',
+		$new_item		= 'New Event',
+		$public			= true,
+		$use_title		= true,
+		$use_editor		= true,
+		$use_revisions	= true,
+		$use_thumbnails	= true,
+		$use_order		= true,
+		$use_metabox	= true,
+		$use_shortcode	= true,
+		$taxonomies		= array('post_tag', 'org_groups'),
+		$menu_icon		= 'dashicons-calendar-alt',
+		$built_in		= false,
+		$default_orderby = null,
+		$default_order	 = null,
+		$sc_interface_fields = array(
+			array(
+				'name' => 'Header',
+				'id' => 'header',
+				'help_text' => 'Enter the day of the week',
+				'type' => 'text',
+			)
+		);
+
+	public function fields()
+	{
+		$prefix = $this->options('name') . '_';
+		return array(
+			array(
+				'name' => 'Agency',
+				'descr' => '',
+				'id' => $prefix . 'agency',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Date',
+				'descr' => '',
+				'id' => $prefix . 'date',
+				'type' => 'date'
+			),
+			array(
+				'name' => 'Time',
+				'descr' => '',
+				'id' => $prefix . 'time',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Type',
+				'descr' => 'In person, Virtual, or Hybrid?',
+				'id' => $prefix . 'type',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Location',
+				'descr' => '',
+				'id' => $prefix . 'location',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'URL',
+				'descr' => 'Add a link for RSVP, social media post, etc.',
+				'id' => $prefix . 'url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'URL text',
+				'descr' => 'Add the display text',
+				'id' => $prefix . 'url_text',
+				'type' => 'text',
+			),
+		);
+	}
+	public function metabox()
+	{
+		if ($this->options('use_metabox')) {
+			return array(
+				'id'       => 'custom_' . $this->options('name') . '_metabox',
+				'title'    => __($this->options('singular_name') . ' Fields'),
+				'page'     => $this->options('name'),
+				'context'  => 'after_title',
+				'priority' => 'high',
+				'fields'   => $this->fields(),
+			);
+		}
+		return null;
+	}
+
+	public function register_metaboxes()
+	{
+		// Move and Rename the Featured Image Metabox.
+		remove_meta_box('postimagediv', $this->name, 'side');
+		add_meta_box(
+			'postimagediv',
+			__("{$this->singular_name} Image"),
+			'post_thumbnail_meta_box',
+			$this->name,
+			'after_title',
+			'high'
+		);
+		CustomPostType::register_meta_boxes_after_title();
+
+		parent::register_metaboxes();
+	}
+	public function shortcode($attr)
+	{
+		$prefix = $this->options('name') . '_';
+		$default_attrs = array(
+			'type' => $this->options('name'),
+			'header' => $this->options('plural_name') . ' List',
+			'css_classes' => '',
+		);
+		if (is_array($attr)) {
+			$attr = array_merge($default_attrs, $attr);
+		} else {
+			$attr = $default_attrs;
+		}
+
+		$context['header'] = $attr['header'];
+		$context['css_classes'] = ($attr['css_classes']) ? $attr['css_classes'] : $this->options('name') . '-list';
+		unset($attr['header']);
+		unset($attr['css_classes']);
+		$args = array('classname' => __CLASS__, 'objects_only' => true);
+		$objects = parent::sc_object_list($attr, $args);
+
+		$context['objects'] = $objects;
+
+		return static::render_objects_to_html($context);
+	}
+
+	public function objectsToHTML($objects, $css_classes)
+	{
+		if (count($objects) < 1) {
+			return (WP_DEBUG) ? '<!-- No objects were provided to objectsToHTML. -->' : '';
+		}
+		$context['css_classes'] = ($css_classes) ? $css_classes : $this->options('name') . '-list';
+		$context['archiveUrl'] = '';
+		$context['objects'] = $objects;
+		return static::render_objects_to_html($context);
+	}
+
+	protected static function render_objects_to_html($context)
+	{
+		ob_start();
+	?>
+		<?php
+		if ($context['header']) :
+		?>
+			<div class="event-header">
+				<h2><?= $context['header'] ?></h2>
+			</div>
+		<?php endif; ?>
+		<div class="<?= $context['css_classes'] ?>">
+			<?php foreach ($context['objects'] as $o) : ?>
+				<?= static::toHTML($o) ?>
+			<?php endforeach; ?>
+		</div>
+	<?php
+
+		return ob_get_clean();
+	}
+
+	public static function toHTML($post_object)
+	{
+		$context['Post_ID'] = $post_object->ID;
+		$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
+		$context['thumbnail']
+			= has_post_thumbnail($post_object)
+			? get_the_post_thumbnail($post_object, $size = 'event-img-size', array('class' => 'img-fluid'))
+			: "<img src='" . $thumbnailUrl . "' alt='thumb' class='img-fluid'>";
+		$context['title'] = get_the_title($post_object->ID, 'title', true);
+		$context['header'] = get_post_meta($post_object->ID, 'header', true);
+
+		$context['event_agency'] = get_post_meta($post_object->ID, 'event_agency', true);
+		$context['event_date'] = get_post_meta($post_object->ID, 'event_date', true);
+		$context['event_time'] = get_post_meta($post_object->ID, 'event_time', true);
+		$context['event_type'] = get_post_meta($post_object->ID, 'event_type', true);
+		$context['event_location'] = get_post_meta($post_object->ID, 'event_location', true);
+		$context['event_url'] = get_post_meta($post_object->ID, 'event_url', true);
+		$context['event_url_text'] = get_post_meta($post_object->ID, 'event_url_text', true);
+
+		$context['content'] = wpautop($post_object->post_content);
+
+		return static::render_to_html($context);
+	}
+
+	protected static function render_to_html($context)
+	{
+		ob_start();
+	?>
+		<div class="event-group col-sm-4 col-12 mb-4">
+			<?= $context['thumbnail'] ?>
+			<div class="event-content">
+				<h4 class="event-title">
+					<?= $context['title'] ?>
+				</h4>
+				<h5 class="event-agency"><?= $context['event_agency'] ?></h5>
+				<p class="event-date"><?= date('l, M j', strtotime($context['event_date'])) ?> at <?= $context['event_time'] ?></p>
+				<p class="event-type-location"><?= $context['event_type'] ?>: <?= $context['event_location'] ?></p>
+				<p class="event-text"><?= $context['content'] ?></p>
+				<a class="event-link" href="<? $context['event_url']?>"><?= $context['event_url_text'] ?></a>
+			</div>
+		</div>
+	<?php
+		return ob_get_clean();
+	}
+}
+
 /**
  * An employee associated with this site.
  */
@@ -1314,6 +1532,7 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\Page',
 		__NAMESPACE__.'\Alert',
 		__NAMESPACE__.'\Billboard',
+		__NAMESPACE__ . '\Events',
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
 		__NAMESPACE__.'\Records',

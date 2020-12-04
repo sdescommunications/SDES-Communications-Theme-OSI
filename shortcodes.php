@@ -836,19 +836,26 @@ class sc_quizjs extends ShortCodeBase{
 	public static function callback( $attr, $content = null) {
 		
 		$base =  get_template_directory_uri();
+		$js = $base . '/js/quiz_loader.js';
+		$ss = $base . '/js/safari_scroll.js';
+		$css = $base . '/css/buzzstyle.css';
 		
-		$js = $base.'/js/quizselect.min.js';
-		$css = $base.'/css/buzzstyle.css';
-		
-		
-		//got the scripts & styles to load !!! YwY
-		wp_enqueue_script('quizselect-min', $js, array(), '1.0.0', true );
-		
-		wp_enqueue_style('buzzstyle',$css, array(), '1.0.0', 'all');
-		
-		
+		// Quiz JS
+		wp_enqueue_script( 'quiz_loader', $js, array(), '1.0.0', true );
 
+		// Quiz CSS
+		wp_enqueue_style( 'buzzstyle', $css, array(), '1.0.0', 'all' );	
+
+		// Polyfill for scroll behavior on Safari
+		wp_enqueue_script( 'safari_scroll', $ss );
 		
+		// Add "module" type attribute to script tag to support ES6 export/import 
+		add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+			if ( $handle === 'quiz_loader' ) {
+				$tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+			}
+			return $tag;
+		}, 10, 3 );
 	}
 }
 /*
