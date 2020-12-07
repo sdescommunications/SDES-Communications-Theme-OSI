@@ -72,6 +72,13 @@ function delete_associated_files( $post_id ) {
     }
   }
 }
+
+/**
+ * Add new thumbnail size
+ */
+add_theme_support('pop-up-banner');
+add_image_size('event-img-size', 330, 330);
+
 add_action( 'before_delete_post', 'delete_associated_files' );
 
 require_once( 'functions/menu-walkers.php' );

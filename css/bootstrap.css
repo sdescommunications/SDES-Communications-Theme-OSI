@@ -1108,9 +1108,14 @@ header .header-break img {
   width: 50px;
 }
 
-.event-content p {
+.event-group {
+  margin-bottom: 40px;
+}
+
+.event-content p,
+.event-time-div {
   color: #636c72 !important;
-  margin-bottom: 0;
+  margin-bottom: 4px;
 }
 
 .event-content {
@@ -1121,8 +1126,21 @@ header .header-break img {
   margin-top: 20px;
 }
 
+.event-date {
+  display: flex;
+}
+
 .events-header {
   margin-bottom: 20px;
+}
+
+.no-events-message {
+  margin: 40px 0px;
+  text-align: center;
+}
+
+.no-events-message em {
+  display: block;
 }
 
 .faq:after {

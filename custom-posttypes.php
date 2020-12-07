@@ -479,23 +479,23 @@ class Billboard extends CustomPostType {
 class Events extends CustomPostType
 {
 	public
-		$name 			= 'event',
+		$name 		= 'event',
 		$plural_name	= 'Events',
 		$singular_name	= 'Event',
 		$add_new_item	= 'Add New Event',
-		$edit_item 		= 'Edit Event',
-		$new_item		= 'New Event',
-		$public			= true,
-		$use_title		= true,
-		$use_editor		= true,
+		$edit_item 	= 'Edit Event',
+		$new_item	= 'New Event',
+		$public		= true,
+		$use_title	= true,
+		$use_editor	= true,
 		$use_revisions	= true,
 		$use_thumbnails	= true,
-		$use_order		= true,
+		$use_order	= true,
 		$use_metabox	= true,
 		$use_shortcode	= true,
-		$taxonomies		= array('post_tag', 'org_groups'),
-		$menu_icon		= 'dashicons-calendar-alt',
-		$built_in		= false,
+		$taxonomies	= array('post_tag', 'org_groups'),
+		$menu_icon	= 'dashicons-calendar-alt',
+		$built_in	= false,
 		$default_orderby = null,
 		$default_order	 = null,
 		$sc_interface_fields = array(
@@ -524,10 +524,28 @@ class Events extends CustomPostType
 				'type' => 'date'
 			),
 			array(
-				'name' => 'Time',
+				'name' => 'Start Time',
 				'descr' => '',
-				'id' => $prefix . 'time',
-				'type' => 'text'
+				'id' => $prefix . 'start_time',
+				'type' => 'text',
+			),
+			array(
+				'name' => ' Start Time AM/PM',
+				'descr' => '',
+				'id' => $prefix . 'start_am_pm',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'End Time',
+				'descr' => '',
+				'id' => $prefix . 'end_time',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'End Time AM/PM',
+				'descr' => '',
+				'id' => $prefix . 'end_am_pm',
+				'type' => 'text',
 			),
 			array(
 				'name' => 'Type',
@@ -657,7 +675,10 @@ class Events extends CustomPostType
 
 		$context['event_agency'] = get_post_meta($post_object->ID, 'event_agency', true);
 		$context['event_date'] = get_post_meta($post_object->ID, 'event_date', true);
-		$context['event_time'] = get_post_meta($post_object->ID, 'event_time', true);
+		$context['event_start_time'] = get_post_meta($post_object->ID, 'event_start_time', true);
+		$context['event_end_time'] = get_post_meta($post_object->ID, 'event_end_time', true);
+		$context['event_start_am_pm'] = get_post_meta($post_object->ID, 'event_start_am_pm', true);
+		$context['event_end_am_pm'] = get_post_meta($post_object->ID, 'event_end_am_pm', true);
 		$context['event_type'] = get_post_meta($post_object->ID, 'event_type', true);
 		$context['event_location'] = get_post_meta($post_object->ID, 'event_location', true);
 		$context['event_url'] = get_post_meta($post_object->ID, 'event_url', true);
@@ -679,7 +700,7 @@ class Events extends CustomPostType
 					<?= $context['title'] ?>
 				</h4>
 				<h5 class="event-agency"><?= $context['event_agency'] ?></h5>
-				<p class="event-date"><?= date('l, M j', strtotime($context['event_date'])) ?> at <?= $context['event_time'] ?></p>
+				<p class="event-date"><?= date('l, M j', strtotime($context['event_date'])) ?> at <?= $context['event_start_time'] ?> <?= $context['event_start_am_pm'] ?>-<?= $context['event_end_time'] ?> <?= $context['event_end_am_pm'] ?></p>
 				<p class="event-type-location"><?= $context['event_type'] ?>: <?= $context['event_location'] ?></p>
 				<p class="event-text"><?= $context['content'] ?></p>
 				<a class="event-link" href="<? $context['event_url']?>"><?= $context['event_url_text'] ?></a>
