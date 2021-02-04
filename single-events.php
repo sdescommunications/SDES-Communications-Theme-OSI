@@ -63,7 +63,7 @@ the_post();
                                         <?php
                                         echo  get_the_post_thumbnail_url(get_the_ID(), 'event-img-size');
                                         ?>
-                                        " class="img-fluid" width='330' height='330' />
+                                        " class="img-fluid" width='300' height='300' />
 
                                         <div class="event-content">
                                             <h4 class="event-title">
@@ -91,12 +91,12 @@ the_post();
                                                     echo "<p>" . date('l, M j', strtotime($date));
 
                                                     if (!empty($start_time)) {
-                                                        echo " at&nbsp" . " </p>" . "<div class='event-time-div'><p>" . $start_time . " " . $start_am_pm;
+                                                        echo " at&nbsp" . $start_time . $start_am_pm;
 
                                                         if (!empty($end_time)) {
-                                                            echo " - " . $end_time . " " . $end_am_pm . "</div>";
+                                                            echo " - " . $end_time . $end_am_pm . "</p>";
                                                         } else {
-                                                            echo "</p></div>";
+                                                            echo "</p>";
                                                         }
                                                     } else {
                                                         echo "</p>";
@@ -148,7 +148,7 @@ the_post();
                                         <?php
                                         echo  get_the_post_thumbnail_url(get_the_ID(), 'event-img-size');
                                         ?>
-                                        " class="img-fluid" width='330' height='330' />
+                                        " class="img-fluid" width='300' height='300' />
 
                                         <div class="event-content">
                                             <h4 class="event-title">
@@ -217,7 +217,7 @@ the_post();
                                         <?php
                                         echo  get_the_post_thumbnail_url(get_the_ID(), 'event-img-size');
                                         ?>
-                                        " class="img-fluid" width='330' height='330' />
+                                        " class="img-fluid" width='300' height='300' />
 
                                         <div class="event-content">
                                             <h4 class="event-title">
