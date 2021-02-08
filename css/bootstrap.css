@@ -1119,15 +1119,11 @@ header .header-break img {
 }
 
 .event-content {
-  max-width: 330px;
+  max-width: 300px;
 }
 
 .event-title {
   margin-top: 20px;
-}
-
-.event-date {
-  display: flex;
 }
 
 .events-header {
