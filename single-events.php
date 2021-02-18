@@ -24,6 +24,7 @@ the_post();
                         $args = array(
                             'post_type' => 'event',
                             'tag' => 'thisweek',
+                            'posts_per_page' => '-1',
 
                             'meta_query' => array(
                                 array(
@@ -130,6 +131,7 @@ the_post();
                         $args = array(
                             'post_type' => 'event',
                             'tag' => 'weekly',
+                            'posts_per_page' => '-1',
                         );
 
                         $the_query = new WP_Query($args);
