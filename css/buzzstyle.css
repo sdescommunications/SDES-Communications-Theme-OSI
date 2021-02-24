@@ -21,6 +21,8 @@ ul {
 }
 .result {
   color: #fff;
+  background-color: #000;
+  padding: 20px;
 }
 .result a{
  color: #fff;
