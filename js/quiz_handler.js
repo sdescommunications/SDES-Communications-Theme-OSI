@@ -20,7 +20,7 @@ export default class QuizHandler {
     constructor() {
         this.jumboList = [];
         this.choiceList = [];
-        this.form = null;
+        //this.form = null;
         this.results = [];
     }
 
@@ -35,7 +35,7 @@ export default class QuizHandler {
         this.choiceList = document.querySelectorAll('.quiz-choice');
 
         // Get form element
-        this.form = document.querySelector('#consultationForm');
+        //this.form = document.querySelector('#consultationForm');
 
         // Set event handlers
         this.bindEvents();
@@ -51,12 +51,12 @@ export default class QuizHandler {
         });
 
         // Form submission
-        this.form.addEventListener('submit', () => this.submitForm());
+        //this.form.addEventListener('submit', () => this.submitForm());
     }
 
     /**
      * Handle form submission
-     */
+     
     submitForm() {
         // Fetch form data
         const userName = document.getElementById('nameInput').value;
@@ -71,7 +71,7 @@ export default class QuizHandler {
 
         // Prevent default form submission behavior
         return false;
-    }
+    }*/
 
     /**
      * Respond to the user selecting a choice
