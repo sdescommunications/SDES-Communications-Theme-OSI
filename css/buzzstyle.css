@@ -20,12 +20,7 @@ ul {
   list-style: none;
 }
 .result {
-  color: #fff;
-  background-color: #000;
-  padding: 30px;
-}
-.result a{
- color: #fff;
+  color: #000;
 }
 .resultComplete {
  background: #95200f; 
