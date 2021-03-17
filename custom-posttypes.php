@@ -994,7 +994,6 @@ class News extends CustomPostType {
 				'type' => $this->options( 'name' ),
 				'show-archives' => false,			
 				'meta_key' => $prefix.'start_date',			
-				'header' => 'News & Announcements',
 				'css_classes' => '',
 				'orderby' => 'date',
 				'order'   => 'DESC',
@@ -1172,7 +1171,6 @@ class News extends CustomPostType {
 						
 						</div>
 						<div class="news-summary">							
-							<?= substr($context['excerpt'], 0, 600) ?>
 							<p><a class="" href="<?= $context['permalink'] ?>"> Read More >> </a></p>
 						</div>
 					</div>
