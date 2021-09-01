@@ -899,7 +899,7 @@ class Staff extends CustomPostType {
 							<?= $context['title'] ?>
 						<?php } ?>
 					</h3>
-					<h3 class="staff-pronouns"><?= $context['staff_pronouns'] ?></h3>
+					<h6 class="staff-pronouns"><?= $context['staff_pronouns'] ?></h6>
 				</div>
 				<h4 class="staff-title"><?= $context['staff_position_title'] ?></h4>
 				<h5 class="staff-phone"><?= $context['staff_phone'] ?></h5>
