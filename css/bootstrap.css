@@ -1196,7 +1196,6 @@ header .header-break img {
 
 .staff-pronouns{
   color: #636c72;
-  font-style: italic;
   margin-left: 0.5rem;
 }
 
@@ -1248,12 +1247,13 @@ header .header-break img {
 }
 
 .staff .staff-name,
-.staff .staff-pronouns {
+.staff {
   font-size: 2em;
 }
 
 .staff-name-and-pronouns {
   display: flex;
+  align-items: baseline;
 }
 
 .staff .staff-title  {

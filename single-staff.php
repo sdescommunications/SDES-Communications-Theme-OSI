@@ -19,8 +19,8 @@
 <div class="container">
 	<br>
 	<div class="staff-name-and-pronouns">
-		<h1 class="staff-title mr-2"><?= get_the_title(); ?></h1>
-		<h1 class="staff-pronouns"><?= $pronouns ?></h1>
+		<h1 class="staff-title"><?= get_the_title(); ?></h1>
+		<h6 class="staff-pronouns"><?= $pronouns ?></h6>
 	</div>
 	<hr>
 	<section>
