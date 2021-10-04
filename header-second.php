@@ -89,7 +89,7 @@
 						</span>				
 					</article>
 					<aside class="text-lg-right">
-						<a class="translate" href="http://it.sdes.ucf.edu/translate/" data-toggle="tooltip" data-placement="right" title="Translate This Page!"><i class="fa fa-globe"></i></a>
+						<a class="translate" href="https://it.sdes.ucf.edu/translate/" data-toggle="tooltip" data-placement="right" title="Translate This Page!"><i class="fa fa-globe"></i></a>
 					</aside>			
 				</section>
 			</div>
