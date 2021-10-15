@@ -8322,6 +8322,7 @@ button.close {
     text-align: left;
     background-color: white;
     display: block;
+    margin-left: 70px;
 }
 .hover-group * {
     box-sizing: border-box;
@@ -8344,7 +8345,7 @@ button.close {
   
 .hover-body {
     position: absolute;
-    width: 170px;
+    width: 200px;
     height: 195px;
     top: 50%;
     left: 0;
@@ -8371,10 +8372,10 @@ button.close {
 }
   
 .hover-group:hover img {
-    width: 150px;
-    top: 30%;
-    right: -10%;
-    border-radius: 150px; 
+    width: 120px;
+    top: 14%;
+    left: -35%;
+    border-radius: 150px;
 }
 .wide-hover-group:hover img {
     right: -18%;
