@@ -6240,22 +6240,31 @@ tbody.collapse.show {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  flex-wrap: wrap;
 }
 
 .nav-tabs .nav-item {
-  margin-bottom: -1px;
+  margin-bottom: -2px;
+  padding: 2px 0;
 }
 
 .nav-tabs .nav-link {
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-top-right-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
+  background-color: #fafafa;
+  border-color: #ddd;
+  border-bottom: 0;
+  color: #555;
+  font-weight: bold;
+  margin-right: 2px;
 }
 
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
-  border-color: #eceeef #eceeef #ddd;
+  border-color: #ffc904 #ffc904 #ddd;
+  background-color: #ffcc00;
 }
 
 .nav-tabs .nav-link.disabled {
@@ -6268,7 +6277,9 @@ tbody.collapse.show {
 .nav-tabs .nav-item.show .nav-link {
   color: #464a4c;
   background-color: #fff;
-  border-color: #ddd #ddd #fff;
+  border-color: #ffc904 #ffc904 #fff;
+  border-bottom: 2px solid #fff;
+  margin-bottom: -2px;
 }
 
 .nav-tabs .dropdown-menu {
