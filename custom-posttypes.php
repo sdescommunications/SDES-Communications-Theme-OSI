@@ -525,14 +525,32 @@ class Events extends CustomPostType
 			),
 			array(
 				'name' => 'Start Time',
-				'descr' => 'Use military time. Ex: 3:30pm = 15:00, 11am = 11:00',
+				'descr' => '',
 				'id' => $prefix . 'start_time',
 				'type' => 'text',
 			),
 			array(
+				'name' => ' Start Time AM/PM',
+				'descr' => '',
+				'id' => $prefix . 'start_am_pm',
+				'type' => 'text',
+			),
+			array(
 				'name' => 'End Time',
-				'descr' => 'Use military time. Ex: 3:30pm = 15:00, 11am = 11:00',
+				'descr' => '',
 				'id' => $prefix . 'end_time',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'End Time AM/PM',
+				'descr' => '',
+				'id' => $prefix . 'end_am_pm',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Type',
+				'descr' => 'In person, Virtual, or Hybrid?',
+				'id' => $prefix . 'type',
 				'type' => 'text',
 			),
 			array(
@@ -650,8 +668,8 @@ class Events extends CustomPostType
 		$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
 		$context['thumbnail']
 			= has_post_thumbnail($post_object)
-			? get_the_post_thumbnail($post_object, 'post-thumbnail' , array('class' => 'img-fluid'))
-			: "<img src='" . $thumbnailUrl . "' alt='event thumbnail' class='img-fluid'>";
+			? get_the_post_thumbnail($post_object, $size = 'event-img-size', array('class' => 'img-fluid'))
+			: "<img src='" . $thumbnailUrl . "' alt='thumb' class='img-fluid'>";
 		$context['title'] = get_the_title($post_object->ID, 'title', true);
 		$context['header'] = get_post_meta($post_object->ID, 'header', true);
 
@@ -659,6 +677,9 @@ class Events extends CustomPostType
 		$context['event_date'] = get_post_meta($post_object->ID, 'event_date', true);
 		$context['event_start_time'] = get_post_meta($post_object->ID, 'event_start_time', true);
 		$context['event_end_time'] = get_post_meta($post_object->ID, 'event_end_time', true);
+		$context['event_start_am_pm'] = get_post_meta($post_object->ID, 'event_start_am_pm', true);
+		$context['event_end_am_pm'] = get_post_meta($post_object->ID, 'event_end_am_pm', true);
+		$context['event_type'] = get_post_meta($post_object->ID, 'event_type', true);
 		$context['event_location'] = get_post_meta($post_object->ID, 'event_location', true);
 		$context['event_url'] = get_post_meta($post_object->ID, 'event_url', true);
 		$context['event_url_text'] = get_post_meta($post_object->ID, 'event_url_text', true);
@@ -675,16 +696,14 @@ class Events extends CustomPostType
 		<div class="event-group col-sm-4 col-12 mb-4">
 			<?= $context['thumbnail'] ?>
 			<div class="event-content">
-				<h5 class="event-title"><?= $context['title'] ?></h5>
-				<h6 class="event-agency"><?= $context['event_agency'] ?></h6>
-				<ul class="list-unstyled">            
-                   			<div class="mb-1">
-						<li class="event-date"><i class="fa fa-clock-o mr-2" aria-hidden="true"><?= date('m/d', strtotime($context['event_date'])) ?> at <?= date('g:ia', strtotime($context['event_start_time'])) ?>-<?= date('g:ia', strtotime($context['event_end_time'])) ?></li>
-						<li class="event-location"><i class="fa fa-map-marker mr-2" aria-hidden="true"><?= $context['event_location'] ?></li>
-						<li class="event-desc"><?= $context['content'] ?></li>
-					</div>
-					<li class="event-link"><i class="fa fa-link mr-2" aria-hidden="true"><a href="<? $context['event_url']?>"><?= $context['event_url_text'] ?></a></li>
-				</ul>
+				<h4 class="event-title">
+					<?= $context['title'] ?>
+				</h4>
+				<h5 class="event-agency"><?= $context['event_agency'] ?></h5>
+				<p class="event-date"><?= date('l, M j', strtotime($context['event_date'])) ?> at <?= $context['event_start_time'] ?> <?= $context['event_start_am_pm'] ?>-<?= $context['event_end_time'] ?> <?= $context['event_end_am_pm'] ?></p>
+				<p class="event-type-location"><?= $context['event_type'] ?>: <?= $context['event_location'] ?></p>
+				<p class="event-text"><?= $context['content'] ?></p>
+				<a class="event-link" href="<? $context['event_url']?>"><?= $context['event_url_text'] ?></a>
 			</div>
 		</div>
 	<?php
