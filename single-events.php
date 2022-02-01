@@ -22,18 +22,11 @@ function displayEvents($myQuery) {
                 $location = get_post_meta($post->ID, 'event_location', true);
                 $url = get_post_meta($post->ID, 'event_url', true);
                 $url_text = get_post_meta($post->ID, 'event_url_text', true);
-		    
-                $image_url 	= has_post_thumbnail( $post->ID ) ?
-	            wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'full', false ) : null;
-
-                if ( $image_url ) {
-                    $image_url = $image_url[0];
-                }
                 
                 ?>
                 <div class="event-group col-sm-6 col-12 mb-4">
 
-                <img src="<?= !empty($image_url)? $image_url :  get_stylesheet_directory_uri() . '/images/blank.png' ?>" class="img-fluid" width='1024' height='553' />
+                    <img src="<?php echo  get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" class="img-fluid" width='1024' height='553' />
 
                     <div class="event-content">
                         <h5 class="event-title"><?php $title ?></h5>
