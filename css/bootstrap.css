@@ -975,6 +975,15 @@ header .header-break img {
   border-left: 1px solid black !important;
 }
 
+p.menu-sub-header {
+background-color: black;
+width: fit-content;
+color: white;
+text-transform: uppercase;
+padding: 6px 15px;
+font-family: "gotham_boldregular", Arial, sans-serif; 
+}
+
 @media (max-width: 991px) {
   .menu-right {
     border: none;
