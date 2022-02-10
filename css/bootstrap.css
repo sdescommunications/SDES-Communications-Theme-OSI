@@ -976,9 +976,7 @@ header .header-break img {
 }
 
 p.menu-sub-header {
-background-color: black;
 width: fit-content;
-color: white;
 text-transform: uppercase;
 padding: 6px 15px;
 font-family: "gotham_boldregular", Arial, sans-serif; 
